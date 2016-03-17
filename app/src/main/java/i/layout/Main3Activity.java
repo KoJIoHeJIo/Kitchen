@@ -1,6 +1,7 @@
 package i.layout;
 
 import android.app.ListActivity;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,20 +15,29 @@ import android.widget.Toast;
 import com.example.kitchenv12.R;
 
 public class Main3Activity extends ListActivity {
+
     // Строка, которую мы выводим в список
-    String[] mSign =  {"Овен", "Телец", "Близнецы", "Рак", "Лев", "Дева",
+    String[] mSign = {"Овен", "Телец", "Близнецы", "Рак", "Лев", "Дева",
             "Весы", "Скорпион", "Стрелец", "Козерог", "Водолей", "Рыбы"};
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main3);
+        //Что то здесь ломает код...
+        ListView listView = (ListView) findViewById(R.id.listView);
 
-        ArrayAdapter<String> mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mSign);
-        setListAdapter(mAdapter);
-    }
-
-    public void onListItemClick (ListView parent, View v, int position, long id) {
-        Toast.makeText(getApplicationContext(), mSign[position], Toast.LENGTH_SHORT).show();
-    }
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(Main3Activity.this, android.R.layout.simple_spinner_item, mSign);
+try {
+    listView.setAdapter(adapter);
 }
+catch (Exception e)
+{
+    ProgressDialog.show(Main3Activity.this, "Ошибка:"+e, "Подождите, операция выполняется").show();
+}
+
+    }
+
+}
+
+
+
