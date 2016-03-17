@@ -1,6 +1,6 @@
 package i.layout;
 
-import android.app.ListActivity;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import com.example.kitchenv12.R;
 
-public class Main3Activity extends ListActivity {
+public class Main3Activity extends AppCompatActivity{
 
     // Строка, которую мы выводим в список
     String[] mSign = {"Овен", "Телец", "Близнецы", "Рак", "Лев", "Дева",
@@ -23,11 +23,19 @@ public class Main3Activity extends ListActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        try {
+        setContentView(R.layout.activity_main3);
+        }
+        catch (Exception e)
+        {
+            ProgressDialog.show(Main3Activity.this, "Very Ошибка:"+e, "Подождите, операция выполняется").show();
+        }
         //Что то здесь ломает код...
         ListView listView = (ListView) findViewById(R.id.listView);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(Main3Activity.this, android.R.layout.simple_spinner_item, mSign);
 try {
+
     listView.setAdapter(adapter);
 }
 catch (Exception e)
