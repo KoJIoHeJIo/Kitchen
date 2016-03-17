@@ -34,7 +34,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         final TextView tv = (TextView) findViewById(R.id.textView2);
-
+        Intent intent = new Intent(MainActivity.this, i.layout.Main2Activity.class);
+        startActivity(intent);
 
 
 

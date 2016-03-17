@@ -1,32 +1,33 @@
 package i.layout;
 
+import android.app.ListActivity;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.kitchenv12.R;
 
-public class Main3Activity extends AppCompatActivity {
+public class Main3Activity extends ListActivity {
+    // Строка, которую мы выводим в список
+    String[] mSign =  {"Овен", "Телец", "Близнецы", "Рак", "Лев", "Дева",
+            "Весы", "Скорпион", "Стрелец", "Козерог", "Водолей", "Рыбы"};
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ArrayAdapter<String> mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mSign);
+        setListAdapter(mAdapter);
     }
 
+    public void onListItemClick (ListView parent, View v, int position, long id) {
+        Toast.makeText(getApplicationContext(), mSign[position], Toast.LENGTH_SHORT).show();
+    }
 }
