@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Kitchen v1.2</string>
+
+    <string name="title_activity_instruct">instruct</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="valuea">valuea</string>
+    <string name="title_activity_main3">Main3Activity</string>
 </resources>
