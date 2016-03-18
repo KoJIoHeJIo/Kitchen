@@ -23,14 +23,9 @@ public class Main3Activity extends AppCompatActivity{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        try {
+
         setContentView(R.layout.activity_main3);
-        }
-        catch (Exception e)
-        {
-            ProgressDialog.show(Main3Activity.this, "Very Ошибка:"+e, "Подождите, операция выполняется").show();
-        }
-        //Что то здесь ломает код...
+
         ListView listView = (ListView) findViewById(R.id.listView);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(Main3Activity.this, android.R.layout.simple_spinner_item, mSign);
