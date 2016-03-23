@@ -16,30 +16,31 @@ import com.example.kitchenv12.R;
 
 public class Main3Activity extends AppCompatActivity{
 
-    // Строка, которую мы выводим в список
-    String[] mSign = {"Овен", "Телец", "Близнецы", "Рак", "Лев", "Дева",
-            "Весы", "Скорпион", "Стрелец", "Козерог", "Водолей", "Рыбы"};
+    // Источник списка
+    String[] mSign = {"Хлеб белый", "Молоко 3.2% жирности", "Мясо", "Яйца битые", "Спички самовоспламеняющиеся", "Курица, грудка",
+            "Масло", "Халва", "Вино красное, полусладкое 1781 года", "Шашлык свинной", "Вода Норинга 1л", "Сайра в консерве"};
 
-    @Override
+
+
+        @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+            String[] shoplist = getResources().getStringArray(R.array.shopping_list);
 
+        //Основной код списка
         setContentView(R.layout.activity_main3);
-
         ListView listView = (ListView) findViewById(R.id.listView);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(Main3Activity.this, android.R.layout.simple_spinner_item, mSign);
 try {
-
+    ArrayAdapter<String> adapter = new ArrayAdapter<String>(Main3Activity.this, android.R.layout.simple_list_item_1, shoplist);
     listView.setAdapter(adapter);
 }
 catch (Exception e)
-{
-    ProgressDialog.show(Main3Activity.this, "Ошибка:"+e, "Подождите, операция выполняется").show();
+{ Toast toast = Toast.makeText(getApplicationContext(),
+        "Приложение КухнЯ говорит Ошибка."+ "\r\n"+"Программа мертва, мне жаль..."  , Toast.LENGTH_LONG);
+    toast.show();
 }
-
     }
-
 }
 
 
