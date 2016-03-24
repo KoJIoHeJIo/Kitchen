@@ -11,6 +11,6 @@
     <string name="title_activity_instruct">instruct</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
-    <string name="value">value</string>
+    <string name="valuea">valuea</string>
     <string name="title_activity_main3">Список покупок</string>
 </resources>
