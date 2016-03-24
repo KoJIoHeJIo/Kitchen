@@ -9,6 +9,7 @@ import android.widget.Toast;
 import android.widget.Button;
 import android.widget.ProgressBar;
 
+import com.example.kitchenv12.AboutActivity;
 import com.example.kitchenv12.R;
 
 public class Main2Activity extends AppCompatActivity {
@@ -30,10 +31,9 @@ public class Main2Activity extends AppCompatActivity {
         startActivity(intent);
     }
     public void onClickabout (View view)
-    { double alf = 0.01;
-        Toast toast = Toast.makeText(getApplicationContext(),
-                "Приложение КухнЯ"+ "\r\n"+"Версия приложения:" + alf+"v" , Toast.LENGTH_LONG);
-        toast.show();
+    {
+        Intent intent = new Intent(Main2Activity.this, AboutActivity.class);
+        startActivity(intent); 
 
     }
 
