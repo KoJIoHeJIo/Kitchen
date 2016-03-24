@@ -10,7 +10,8 @@
     android:paddingTop="0dp"
     tools:context="i.layout.Main3Activity"
     tools:showIn="@layout/activity_main3"
-    android:id="@+id/inside">
+    android:id="@+id/inside"
+    android:background="#ff9903">
 
     <EditText
         android:layout_marginTop="60dp"

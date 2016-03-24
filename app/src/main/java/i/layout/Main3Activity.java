@@ -1,29 +1,17 @@
 package i.layout;
 
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Instrumentation;
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.kitchenv12.R;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -91,16 +79,15 @@ public class Main3Activity extends AppCompatActivity{
     //Метод для диалога перед удалением элемента списка
             private void openQuitDialog(final ArrayAdapter<String> adapter,final String selectedItem,final EditText editText) {
                 AlertDialog.Builder quitDialog = new AlertDialog.Builder(Main3Activity.this);
-                quitDialog.setTitle("Удалить: " + selectedItem);
+                quitDialog.setTitle("Выбран : " + selectedItem);
 
-                quitDialog.setPositiveButton("Удалить!", new DialogInterface.OnClickListener() {
+                quitDialog.setPositiveButton("Удалить ", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // TODO Auto-generated method stub
                         adapter.remove(selectedItem);
                     }
                 });
-
 
                 quitDialog.setNegativeButton("Редактировать ", new DialogInterface.OnClickListener() {
                     @Override
@@ -111,7 +98,6 @@ public class Main3Activity extends AppCompatActivity{
                         editText.requestFocus();
                     }
                 });
-
 
                 quitDialog.show();
             }

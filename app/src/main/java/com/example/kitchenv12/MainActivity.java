@@ -1,6 +1,5 @@
 package com.example.kitchenv12;
 
-import android.app.Activity;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,9 +8,7 @@ import android.content.Intent;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 public class MainActivity extends AppCompatActivity {
-    int i = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,8 +16,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         final TextView tv = (TextView) findViewById(R.id.textView2);
-
-
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -35,9 +30,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }, 2000);
-
-
-
     }
 
     public void onClick (View view)
