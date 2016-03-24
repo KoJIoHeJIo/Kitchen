@@ -32,7 +32,7 @@ public class Main2Activity extends AppCompatActivity {
     public void onClickabout (View view)
     { double alf = 0.01;
         Toast toast = Toast.makeText(getApplicationContext(),
-                "Приложение КухнЯ"+ "\r\n"+"Версия приложения:" + alf+"v" , Toast.LENGTH_SHORT);
+                "Приложение КухнЯ"+ "\r\n"+"Версия приложения:" + alf+"v" , Toast.LENGTH_LONG);
         toast.show();
 
     }
