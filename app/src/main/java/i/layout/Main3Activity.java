@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -74,7 +75,7 @@ public class Main3Activity extends AppCompatActivity{
                                                    long id) {
                         String selectedItem = parent.getItemAtPosition(position).toString();
 
-                        openQuitDialog(adapter, selectedItem);
+                        openQuitDialog(adapter, selectedItem,editText);
                         return true;
                     }
                 });
@@ -87,7 +88,7 @@ public class Main3Activity extends AppCompatActivity{
         }
 
     //Метод для диалога перед удалением элемента списка
-            private void openQuitDialog(final ArrayAdapter<String> adapter,final String selectedItem) {
+            private void openQuitDialog(final ArrayAdapter<String> adapter,final String selectedItem,final EditText editText) {
                 AlertDialog.Builder quitDialog = new AlertDialog.Builder(
                         Main3Activity.this);
                 quitDialog.setTitle("Удалить: "+selectedItem);
@@ -100,12 +101,18 @@ public class Main3Activity extends AppCompatActivity{
                     }
                 });
 
-                quitDialog.setNegativeButton("Отменить", new DialogInterface.OnClickListener() {
+
+                quitDialog.setNegativeButton("Редактировать ", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // TODO Auto-generated method stub
+                        editText.setText(selectedItem);
+                        adapter.remove(selectedItem);
+                        editText.requestFocus();
+
                     }
                 });
+
 
                 quitDialog.show();
             }
