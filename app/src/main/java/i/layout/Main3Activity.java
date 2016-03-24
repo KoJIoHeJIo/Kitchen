@@ -30,22 +30,20 @@ public class Main3Activity extends AppCompatActivity{
         ListView listView = (ListView) findViewById(R.id.listView);
           final  EditText editText = (EditText) findViewById(R.id.editText);
 
-
 try {
     final ArrayAdapter<String> adapter = new ArrayAdapter<String>(Main3Activity.this, android.R.layout.simple_list_item_1, shoplist);
     listView.setAdapter(adapter);
 //Обработчик нажатия на клавишу энтер и добавления в список
     editText.setOnKeyListener(new View.OnKeyListener() {
         public boolean onKey(View v, int keyCode, KeyEvent event) {
-            //
-            if (event.getAction() == KeyEvent.ACTION_DOWN)
-                if (keyCode == KeyEvent.KEYCODE_ENTER) {
-                    shoplist.add(0, editText.getText().toString());
-                    adapter.notifyDataSetChanged();
-                    editText.setText("");
-                    return true;
-                }
-            return false;
+                 if (event.getAction() == KeyEvent.ACTION_DOWN)
+                     if (keyCode == KeyEvent.KEYCODE_ENTER && editText.getText().length() != 0) {
+                         shoplist.add(0, editText.getText().toString());
+                         adapter.notifyDataSetChanged();
+                         editText.setText("");
+                         return true;
+                     }
+                 return false;
         }
     });
 }
