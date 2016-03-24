@@ -11,4 +11,13 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="valuea">valuea</string>
     <string name="title_activity_main3">Список покупок</string>
+    <string name="about_text">\n\n\n
+    Главный разработчик\n
+        <b>Мелехин Андрей</b>\n\n
+
+    Со-разработчик\n
+        <b>Прокофьева Екатерина</b>\n\n
+
+    Ведущий Арт-Дизайнер\n
+        <b>Бензак Александр</b></string>
 </resources>
