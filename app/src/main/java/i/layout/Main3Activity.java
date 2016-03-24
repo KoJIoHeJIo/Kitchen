@@ -2,6 +2,7 @@ package i.layout;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Instrumentation;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -58,7 +59,7 @@ public class Main3Activity extends AppCompatActivity{
                                 editText.setEnabled(true);
                                 return true;
                             }
-                        return false;
+                        return true;
                     }
                 });
             } catch (Exception e) {
@@ -91,7 +92,7 @@ public class Main3Activity extends AppCompatActivity{
             private void openQuitDialog(final ArrayAdapter<String> adapter,final String selectedItem,final EditText editText) {
                 AlertDialog.Builder quitDialog = new AlertDialog.Builder(
                         Main3Activity.this);
-                quitDialog.setTitle("Удалить: "+selectedItem);
+                quitDialog.setTitle("Удалить: " + selectedItem);
 
                 quitDialog.setPositiveButton("Удалить!", new DialogInterface.OnClickListener() {
                     @Override
@@ -109,7 +110,6 @@ public class Main3Activity extends AppCompatActivity{
                         editText.setText(selectedItem);
                         adapter.remove(selectedItem);
                         editText.requestFocus();
-
                     }
                 });
 
