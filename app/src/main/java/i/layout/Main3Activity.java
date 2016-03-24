@@ -73,6 +73,7 @@ public class Main3Activity extends AppCompatActivity{
                     public boolean onItemLongClick(AdapterView<?> parent, View itemClicked, int position,
                                                    long id) {
                         String selectedItem = parent.getItemAtPosition(position).toString();
+
                         openQuitDialog(adapter, selectedItem);
                         return true;
                     }
@@ -89,7 +90,7 @@ public class Main3Activity extends AppCompatActivity{
             private void openQuitDialog(final ArrayAdapter<String> adapter,final String selectedItem) {
                 AlertDialog.Builder quitDialog = new AlertDialog.Builder(
                         Main3Activity.this);
-                quitDialog.setTitle("Удалить: Вы уверены?");
+                quitDialog.setTitle("Удалить: "+selectedItem);
 
                 quitDialog.setPositiveButton("Удалить!", new DialogInterface.OnClickListener() {
                     @Override

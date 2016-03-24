@@ -1,11 +1,9 @@
 <resources>
-    <string name="app_name">На Кухне</string>
+    <string name="app_name">КухнЯ</string>
     <string-array name="shopping_list">
         <item>Хлеб белый</item>
         <item>Сметана</item>
         <item>Яйца</item>
-        <item>Майонез</item>
-        <item>Выхухоль свежемороженый</item>
     </string-array>
 
     <string name="title_activity_instruct">instruct</string>

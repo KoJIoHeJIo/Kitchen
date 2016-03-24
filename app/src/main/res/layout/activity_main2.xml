@@ -28,9 +28,10 @@
             android:layout_gravity="center_horizontal" />
 
         <Button
-                android:layout_width="wrap_content"
+            android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Список покупок"
+            android:background="#ED7121"
         android:id="@+id/button"
         android:textSize="40dp"
         android:clickable="true"
@@ -42,8 +43,9 @@
             android:layout_marginTop="50dp" />
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#ED7121"
             android:text="О программе"
             android:id="@+id/button2"
             android:textSize="40dp"
