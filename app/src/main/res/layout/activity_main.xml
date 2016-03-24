@@ -11,22 +11,41 @@
     tools:context="com.example.kitchenv12.MainActivity"
     android:background="#ff6702">
 
-    <ProgressBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/progressBar"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView"
-        android:background="@drawable/mainico"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/progressBar"
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:adjustViewBounds="false" />
+        android:layout_alignParentEnd="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:text="КухнЯ"
+            android:textSize="80sp"
+            android:textStyle="bold"
+            android:shadowColor="#ff0000"
+            android:shadowDx="4"
+            android:shadowDy="4"
+            android:shadowRadius="8"
+            android:id="@+id/textView2"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal" />
+
+        <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="357dp"
+            android:id="@+id/imageButton"
+            android:cropToPadding="true"
+            android:background="@drawable/mainico"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:clickable="true"
+            android:onClick="onClick"
+            android:layout_gravity="top|bottom|center_horizontal" />
+
+    </LinearLayout>
+
 </RelativeLayout>
