@@ -59,7 +59,7 @@ public class Main3Activity extends AppCompatActivity{
                                 editText.setEnabled(true);
                                 return true;
                             }
-                        return true;
+                        return false;
                     }
                 });
             } catch (Exception e) {
@@ -90,8 +90,7 @@ public class Main3Activity extends AppCompatActivity{
 
     //Метод для диалога перед удалением элемента списка
             private void openQuitDialog(final ArrayAdapter<String> adapter,final String selectedItem,final EditText editText) {
-                AlertDialog.Builder quitDialog = new AlertDialog.Builder(
-                        Main3Activity.this);
+                AlertDialog.Builder quitDialog = new AlertDialog.Builder(Main3Activity.this);
                 quitDialog.setTitle("Удалить: " + selectedItem);
 
                 quitDialog.setPositiveButton("Удалить!", new DialogInterface.OnClickListener() {
