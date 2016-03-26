@@ -2,6 +2,7 @@ package i.layout;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
@@ -21,71 +22,82 @@ public class Main3Activity extends AppCompatActivity{
     public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
 
-            // Источник списка
-            final String[] member = getResources().getStringArray(R.array.shopping_list);
-            final ArrayList<String> shoplist = new ArrayList<String>();
-            shoplist.addAll(Arrays.asList(member));
+            // Загрузка списка из файла
+            final ArrayList<String> list = loadArrayList("Spisok_pokupok"); // загружаем
 
-            //Основной код списка
+            //Определяем переменные
             setContentView(R.layout.activity_main3);
             ListView listView = (ListView) findViewById(R.id.listView);
             final EditText editText = (EditText) findViewById(R.id.editText);
-            final ArrayAdapter<String> adapter = new ArrayAdapter<String>(Main3Activity.this, android.R.layout.simple_list_item_1, shoplist);
-            listView.setAdapter(adapter);
-            try {
 
-                //Обработчик нажатия на клавишу энтер и добавления в список
+            //создаем адаптер для отображения списка в listView
+            final ArrayAdapter<String> adapter = new ArrayAdapter<String>(Main3Activity.this, android.R.layout.simple_list_item_1, list);
+            listView.setAdapter(adapter);
+
+            //Обработчик нажатия на клавиатуре Enter и созранения нового элемента списка
+            try {
                 editText.setOnKeyListener(new View.OnKeyListener() {
                     public boolean onKey(View v, int keyCode, KeyEvent event) {
                         if (event.getAction() == KeyEvent.ACTION_DOWN)
                             if (keyCode == KeyEvent.KEYCODE_ENTER && editText.getText().length() != 0) {
-                                shoplist.add(0, editText.getText().toString());
+                                editText.requestFocus();
+                                list.add(0, editText.getText().toString());
                                 adapter.notifyDataSetChanged();
                                 editText.setText("");
                                 //Убирает клавиатуру, временный вариант
                                 editText.setEnabled(false);
                                 editText.setEnabled(true);
-                                return true;
+                                
+                                //Сохранения списка с новым элементом в файл
+                                try {
+                                    saveArrayList("Spisok_pokupok", list); // сохраняем
+                                } catch (Exception e)
+                                {exept(e,"сохранении списка в файл.");}
+                                        return true;
                             }
                         return false;
                     }
                 });
             } catch (Exception e) {
-                Toast toast = Toast.makeText(getApplicationContext(),
-                        "Приложение КухнЯ: Ошибка." + "\r\n" + "Добавление нового элемента невозможно.", Toast.LENGTH_LONG);
-                toast.show();
+                exept(e,"создании новой записи.");
             }
 
-                try{
-                //Обработчик долгого нажатия на список
+            //Функциональное меню в списке ListView
+            try {
+                //Обработчик долгого нажатия
                 listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
                     @Override
                     public boolean onItemLongClick(AdapterView<?> parent, View itemClicked, int position,
                                                    long id) {
                         String selectedItem = parent.getItemAtPosition(position).toString();
-
-                        openQuitDialog(adapter, selectedItem,editText);
+                        //Открывает диалог с выбором функций
+                        openQuitDialog(adapter, selectedItem, editText, list);
                         return true;
                     }
                 });
 
             } catch (Exception e) {
-                Toast toast = Toast.makeText(getApplicationContext(),
-                        "Приложение КухнЯ говорит Ошибка." + "\r\n" + "Программа мертва, мне жаль...", Toast.LENGTH_LONG);
-                toast.show();
+                exept(e,"открытии функций списка.");
             }
         }
 
-    //Метод для диалога перед удалением элемента списка
-            private void openQuitDialog(final ArrayAdapter<String> adapter,final String selectedItem,final EditText editText) {
+
+            //Метод вызова диалога, с выбором функций для элемента списка
+            private void openQuitDialog(final ArrayAdapter<String> adapter,final String selectedItem,final EditText editText, final ArrayList<String> list) {
                 AlertDialog.Builder quitDialog = new AlertDialog.Builder(Main3Activity.this);
-                quitDialog.setTitle("Выбран : " + selectedItem);
+                quitDialog.setTitle("Выбран элемент : " + selectedItem);
 
                 quitDialog.setPositiveButton("Удалить ", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // TODO Auto-generated method stub
                         adapter.remove(selectedItem);
+                        list.remove(selectedItem);
+                        //Сохранения списка после удаления
+                        try {
+                            saveArrayList("Spisok_pokupok", list); // сохраняем
+                        } catch (Exception e)
+                        {exept(e,"сохранении списка в файл.");}
                     }
                 });
 
@@ -101,7 +113,34 @@ public class Main3Activity extends AppCompatActivity{
 
                 quitDialog.show();
             }
+
+    //Сохранение списка в файл
+    private void saveArrayList(String name, ArrayList<String> list) {
+        SharedPreferences prefs = getSharedPreferences("myPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        StringBuilder sb = new StringBuilder();
+        for (String s : list) sb.append(s).append("<s>");
+        sb.delete(sb.length() - 3, sb.length());
+        editor.putString(name, sb.toString()).apply();
     }
+//Загрузка списка из файла
+    private ArrayList<String> loadArrayList(String name) {
+        SharedPreferences prefs = getSharedPreferences("myPrefs", MODE_PRIVATE);
+        String[] strings = prefs.getString(name, "").split("<s>");
+        ArrayList<String> list = new ArrayList<>();
+        list.addAll(Arrays.asList(strings));
+        return list;
+    }
+    //Сообщение об ошибке (код ошибки, имя действия)
+    public void exept(Exception e, String doit)
+    {
+        Toast toast = Toast.makeText(getApplicationContext(),
+                "Приложение КухнЯ: Ошибка при " +doit+ "\r\n" + "Код ошибки: "+e, Toast.LENGTH_LONG);
+        toast.show();
+    }
+
+    }
+
 
 
 
