@@ -45,11 +45,9 @@ public class Main3Activity extends AppCompatActivity{
                                 adapter.notifyDataSetChanged();
                                 editText.setText("");
                                 //Убирает клавиатуру, временный вариант
-                                //editText.setEnabled(false);
-                                //editText.setEnabled(true);
-                                //editText.callOnClick();
-
-
+                                editText.setEnabled(false);
+                                editText.setEnabled(true);
+                                
                                 //Сохранения списка с новым элементом в файл
                                 try {
                                     saveArrayList("Spisok_pokupok", list); // сохраняем
