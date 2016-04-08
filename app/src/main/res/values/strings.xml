@@ -1,10 +1,5 @@
 <resources>
     <string name="app_name">КухнЯ</string>
-    <string-array name="shopping_list">
-        <item>Хлеб белый</item>
-        <item>Сметана</item>
-        <item>Яйца</item>
-    </string-array>
 
     <string name="title_activity_instruct">instruct</string>
     <string name="dummy_button">Dummy Button</string>
