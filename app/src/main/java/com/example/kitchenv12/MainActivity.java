@@ -55,6 +55,8 @@ public void LogIn ()
     final EditText pass = (EditText) findViewById(R.id.pass);
     String names = "userspass";
     final String name = loadfile(names); // загружаем
+    String passw = "password";
+    final String pasw = loadfile(passw); // загружаем
     if (name!=null)
     {pass.setVisibility(TextView.VISIBLE);
         do {
@@ -63,16 +65,21 @@ public void LogIn ()
                         if (event.getAction() == KeyEvent.ACTION_DOWN)
                             if (keyCode == KeyEvent.KEYCODE_ENTER && pass.getText().length() != 0) {
                                 pass.requestFocus();
-
+                                if(pass.getText().toString()==pasw)
+                                {comeIn();}
+                                else { Toast toast = Toast.makeText(getApplicationContext(),
+                                        "Пароль введен неверно." + "\r\n" + "Попробуйте еще раз"
+                                        , Toast.LENGTH_LONG);
+                                    toast.show();}
                             }
                         return false;
                     }
-                });
+                });}while (1!=1);
 
 
 
-        }while ()
-        comeIn();
+
+
     }
 }
     ///////////////////////////////////////////////////////////////work
