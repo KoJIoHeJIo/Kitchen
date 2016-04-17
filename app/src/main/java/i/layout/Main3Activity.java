@@ -4,7 +4,10 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -21,6 +24,27 @@ public class Main3Activity extends AppCompatActivity{
         @Override
     public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_main3);
+try {
+    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+    setSupportActionBar(toolbar);
+
+    FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+    fab.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Snackbar.make(view, "Я работаю!!!", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
+        }
+    });
+
+    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    toolbar.setTitle("Список продуктов");
+}catch (Exception e)
+{
+    exept(e,"припилевании тулбара.");
+}
+
 
             // Принимаем заголовок (имя файла хранения)
             final String header = getIntent().getStringExtra("header");
@@ -29,7 +53,7 @@ public class Main3Activity extends AppCompatActivity{
             final ArrayList<String> list = loadArrayList(header); // загружаем
 
             // Определение переменных
-            setContentView(R.layout.activity_main3);
+
             ListView listView = (ListView) findViewById(R.id.listView);
             final EditText editText = (EditText) findViewById(R.id.editText);
 
@@ -50,7 +74,7 @@ public class Main3Activity extends AppCompatActivity{
                                 // Убирает клавиатуру, временный вариант
                                 editText.setEnabled(false);
                                 editText.setEnabled(true);
-                                
+
                                 // Сохранения списка с новым элементом в файл
                                 try {
                                     saveArrayList(header, list); // сохраняем
