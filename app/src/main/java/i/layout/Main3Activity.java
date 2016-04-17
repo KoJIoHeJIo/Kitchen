@@ -22,19 +22,22 @@ public class Main3Activity extends AppCompatActivity{
     public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
 
-            // Загрузка списка из файла
-            final ArrayList<String> list = loadArrayList("Spisok_pokupok"); // загружаем
+            // Принимаем заголовок (имя файла хранения)
+            final String header = getIntent().getStringExtra("header");
 
-            //Определяем переменные
+            // Загрузка списка из файла
+            final ArrayList<String> list = loadArrayList(header); // загружаем
+
+            // Определение переменных
             setContentView(R.layout.activity_main3);
             ListView listView = (ListView) findViewById(R.id.listView);
             final EditText editText = (EditText) findViewById(R.id.editText);
 
-            //создаем адаптер для отображения списка в listView
+            // Адаптер для отображения списка в listView
             final ArrayAdapter<String> adapter = new ArrayAdapter<String>(Main3Activity.this, android.R.layout.simple_list_item_1, list);
             listView.setAdapter(adapter);
 
-            //Обработчик нажатия на клавиатуре Enter и созранения нового элемента списка
+            // Обработчик нажатия на клавиатуре Enter и созранения нового элемента списка
             try {
                 editText.setOnKeyListener(new View.OnKeyListener() {
                     public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -44,13 +47,13 @@ public class Main3Activity extends AppCompatActivity{
                                 list.add(0, editText.getText().toString());
                                 adapter.notifyDataSetChanged();
                                 editText.setText("");
-                                //Убирает клавиатуру, временный вариант
+                                // Убирает клавиатуру, временный вариант
                                 editText.setEnabled(false);
                                 editText.setEnabled(true);
                                 
-                                //Сохранения списка с новым элементом в файл
+                                // Сохранения списка с новым элементом в файл
                                 try {
-                                    saveArrayList("Spisok_pokupok", list); // сохраняем
+                                    saveArrayList(header, list); // сохраняем
                                 } catch (Exception e)
                                 {exept(e,"сохранении списка в файл.");}
                                         return true;
@@ -62,15 +65,15 @@ public class Main3Activity extends AppCompatActivity{
                 exept(e,"создании новой записи.");
             }
 
-            //Функциональное меню в списке ListView
+            // Функциональное меню в списке ListView
             try {
-                //Обработчик долгого нажатия
+                // Обработчик долгого нажатия
                 listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
                     @Override
                     public boolean onItemLongClick(AdapterView<?> parent, View itemClicked, int position,
                                                    long id) {
                         String selectedItem = parent.getItemAtPosition(position).toString();
-                        //Открывает диалог с выбором функций
+                        // Открывает диалог с выбором функций
                         openQuitDialog(adapter, selectedItem, editText, list);
                         return true;
                     }
@@ -82,7 +85,7 @@ public class Main3Activity extends AppCompatActivity{
         }
 
 
-            //Метод вызова диалога, с выбором функций для элемента списка
+            // Метод вызова диалога, с выбором функций для элемента списка
             private void openQuitDialog(final ArrayAdapter<String> adapter,final String selectedItem,final EditText editText, final ArrayList<String> list) {
                 AlertDialog.Builder quitDialog = new AlertDialog.Builder(Main3Activity.this);
                 quitDialog.setTitle("Выбран элемент : " + selectedItem);
@@ -93,7 +96,7 @@ public class Main3Activity extends AppCompatActivity{
                         // TODO Auto-generated method stub
                         adapter.remove(selectedItem);
                         list.remove(selectedItem);
-                        //Сохранения списка после удаления
+                        // Сохранения списка после удаления
                         try {
                             saveArrayList("Spisok_pokupok", list); // сохраняем
                         } catch (Exception e)
@@ -114,7 +117,7 @@ public class Main3Activity extends AppCompatActivity{
                 quitDialog.show();
             }
 
-    //Сохранение списка в файл
+    // Сохранение списка в файл
     private void saveArrayList(String name, ArrayList<String> list) {
         SharedPreferences prefs = getSharedPreferences("myPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
@@ -123,7 +126,7 @@ public class Main3Activity extends AppCompatActivity{
         sb.delete(sb.length() - 3, sb.length());
         editor.putString(name, sb.toString()).apply();
     }
-//Загрузка списка из файла
+// Загрузка списка из файла
     private ArrayList<String> loadArrayList(String name) {
         SharedPreferences prefs = getSharedPreferences("myPrefs", MODE_PRIVATE);
         String[] strings = prefs.getString(name, "").split("<s>");
@@ -131,7 +134,7 @@ public class Main3Activity extends AppCompatActivity{
         list.addAll(Arrays.asList(strings));
         return list;
     }
-    //Сообщение об ошибке (код ошибки, имя действия)
+    // Сообщение об ошибке (код ошибки, имя действия)
     public void exept(Exception e, String doit)
     {
         Toast toast = Toast.makeText(getApplicationContext(),

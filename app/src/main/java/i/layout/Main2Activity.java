@@ -20,6 +20,7 @@ public class Main2Activity extends AppCompatActivity {
     {
         //Эти 2 строки создают новое активити и передают ему управление
         Intent intent = new Intent(Main2Activity.this, i.layout.Main3Activity.class);
+        intent.putExtra("header", "SpisokPokupok");
         startActivity(intent);
     }
     public void onClickabout (View view)
@@ -29,9 +30,9 @@ public class Main2Activity extends AppCompatActivity {
     }
     public void onClickprod (View view)
     {
-        //Временная заглушка
-        Toast toast = Toast.makeText(getApplicationContext(),
-                "Внимание! " + "\r\n" + "Воспользуйтесь списком покупок. ", Toast.LENGTH_LONG);
-        toast.show();
+        Intent intent = new Intent(Main2Activity.this, Main3Activity.class);
+        // Передача данных между окнами (ключ-значение)
+        intent.putExtra("header", "SpisokProductov");
+        startActivity(intent);
     }
 }

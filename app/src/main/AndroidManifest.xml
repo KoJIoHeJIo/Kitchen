@@ -34,7 +34,16 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="i.layout.Main2Activity" />
         </activity>
-        <activity android:name=".AboutActivity"></activity>
+        <activity android:name=".AboutActivity" />
+        <activity
+            android:name="ru.SpisokProduktov.SpisokProduktov"
+            android:label="@string/title_activity_spisok_produktov"
+            android:parentActivityName="i.layout.Main2Activity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="i.layout.Main2Activity" />
+        </activity>
     </application>
 
 </manifest>
