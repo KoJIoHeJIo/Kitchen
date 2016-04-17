@@ -22,8 +22,11 @@ public class Main3Activity extends AppCompatActivity{
     public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
 
+            // Принимаем заголовок (имя файла хранения)
+            final String header = getIntent().getStringExtra("header");
+
             // Загрузка списка из файла
-            final ArrayList<String> list = loadArrayList("Spisok_pokupok"); // загружаем
+            final ArrayList<String> list = loadArrayList(header); // загружаем
 
             // Определение переменных
             setContentView(R.layout.activity_main3);
@@ -50,7 +53,7 @@ public class Main3Activity extends AppCompatActivity{
                                 
                                 // Сохранения списка с новым элементом в файл
                                 try {
-                                    saveArrayList("Spisok_pokupok", list); // сохраняем
+                                    saveArrayList(header, list); // сохраняем
                                 } catch (Exception e)
                                 {exept(e,"сохранении списка в файл.");}
                                         return true;
