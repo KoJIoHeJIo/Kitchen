@@ -30,9 +30,9 @@ public class Main2Activity extends AppCompatActivity {
     }
     public void onClickprod (View view)
     {
-        Intent intent = new Intent(Main2Activity.this, Main3Activity.class);
+        Intent intent = new Intent(Main2Activity.this, SpisokProduktov.class);
         // Передача данных между окнами (ключ-значение)
-        intent.putExtra("header", "SpisokProductov");
+        //intent.putExtra("header", "SpisokProductov");
         startActivity(intent);
     }
 }
