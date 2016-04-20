@@ -6,8 +6,11 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.content.Intent;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -25,36 +28,44 @@ public class MainActivity extends AppCompatActivity {
         // Заставка приложения
         final ImageButton ib = (ImageButton) findViewById(R.id.imageButton);
         // Надпись кухня
-        final TextView tv = (TextView) findViewById(R.id.textView2);
+        final TextView logo = (TextView) findViewById(R.id.logo);
+        // Сообщения в процессе авторизации и регистрации
+        final TextView message = (TextView) findViewById(R.id.massage);
+
+        // Поле ввода пароля
+        final AutoCompleteTextView pass = (AutoCompleteTextView) findViewById(R.id.pass);
+        // Поле ввода логина
+        final AutoCompleteTextView login = (AutoCompleteTextView) findViewById(R.id.login);
 
         // Проверяем, первый ли раз запущенна программа
         final SharedPreferences sp = getSharedPreferences(MY_SETTINGS,
                 Context.MODE_PRIVATE);
         boolean hasVisited = sp.getBoolean("hasVisited", false);
-        // Текст приветствия
-        final EditText hi = (EditText) findViewById(R.id.Hello);
+        boolean passon = sp.getBoolean("passon", false);
 
         if (!hasVisited) {
-            // выводим нужную активность
+            sp.getString("login","");
+            sp.getString("password","");
             SharedPreferences.Editor e = sp.edit();
             e.putBoolean("hasVisited", true);
             e.commit();
              // Подтверждение действия
             e.apply();
-
-            registration(sp);
+            // Принудительный процесс регистрации
+            registration(sp,message,login,pass);
         }
-else{
+            else{
+            // Начинаем процесс авторизации
+                LogIn(sp, message, login, pass);
+                }
 
-    }
-        LogIn(sp,hi);
-        //registration(sp);
     }
 
 
     // Вход в основную часть программы
     public void comeIn ()
-    {// Таймер отображения заставки, по окончании делает ее невидимой и начинает авторизацию
+    {
+    // Таймер отображения заставки, по окончании делает ее невидимой и начинает авторизацию
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -71,54 +82,85 @@ else{
         }, 1000);
     }
 
+
+
     ///////////////////////////////////////////////////working
 
-public void LogIn (final SharedPreferences sp,EditText hi)
+public void LogIn (final SharedPreferences sp, final TextView message,final AutoCompleteTextView login,final AutoCompleteTextView pass )
 {
-    String name = sp.getString("userName",new String());
-    hi.setText(name);
+    String name = sp.getString("login",new String());
+    final String password = sp.getString("password",new String());
     // Если имя пользователя не указано
-   if(name.equals("")){registration(sp);}
-    // Если имя указанно
-    else if(!name.equals(""))
+   if(name.equals("")){registration(sp,message,login,pass);}
+    // Если имя указанно и пароль не указан
+    else if(!name.equals("") && password.equals(""))
    {
-       hi.setText("Здравствуй "+name);
+       login.setText(name);
+       message.setText("Здравствуй " + name);
        comeIn();
+   }
+    else if(!name.equals("") && !password.equals(""))
+   {
+       login.setText(name);
+       message.setText("Введите пароль");
+       pass.setOnKeyListener(new View.OnKeyListener() {
+                                          public boolean onKey(View v, int keyCode, KeyEvent event) {
+                                              if (event.getAction() == KeyEvent.ACTION_DOWN)
+                                              {
+                                                  if (keyCode == KeyEvent.KEYCODE_ENTER)
+                                                  {
+                                                      // Проверка на пустой пароль
+                                                      if (pass.getText().length() == 0) {
+                                                          message.setText("Пароль не может быть пустым");
+                                                          return false;
+                                                      }
+                                                      String vrpass = sp.getString("password",new String());
+                                                      // Проверка верности пароля
+                                                      if (pass.getText().toString().equals(vrpass)) {
+                                                          String userName = pass.getText().toString();
+                                                          message.setText("Здравствуй " + userName);
+                                                          return true;
+                                                      }
+                                                      // Пароль неверный
+                                                      else
+                                                      {
+                                                          message.setText("Пароль невереный!");
+                                                          return false;
+                                                      }
+
+                                                  }
+                                                      return false;
+                                              }
+                                              return false;
+                                          }
+                                      }
+       );
+
    }
 
 }
+
+
     // Регистрация нового пользователя
-    private void registration(final SharedPreferences sp )
-    { // Строка Объявления
-        final EditText hi = (EditText) findViewById(R.id.Hello);
-        final EditText userNameLogin = (EditText) findViewById(R.id.name);
+    private void registration(final SharedPreferences sp,final TextView message,final AutoCompleteTextView login,final AutoCompleteTextView pass )
+    {
+        final Button goon = (Button) findViewById(R.id.goon);
+        String hello = "Введите логин, и при необходимости пароль ";
+        message.setText(hello);
+        login.isFocusable();
 
-        String hello = "Введите ваше имя: ";
-        hi.setText(hello);
-        userNameLogin.isFocusable();
+        goon.setOnTouchListener(new View.OnTouchListener() {
 
-        userNameLogin.setOnKeyListener(new View.OnKeyListener()
-        {
-            public boolean onKey(View v, int keyCode, KeyEvent event)
-            {if(event.getAction() == KeyEvent.ACTION_DOWN)
-            {if (keyCode == KeyEvent.KEYCODE_ENTER && userNameLogin.getText().length() != 0)
-            {
-                // сохраняем текст, введенный до нажатия Enter в переменную
-                String userName = userNameLogin.getText().toString();
-                userNameLogin.setText("");
-                hi.setText("Здравствуй " + userName);
-                SharedPreferences.Editor e = sp.edit();
-                e.putString("userName", userName);
-                e.commit();
-                comeIn();
-                return true;
-            }
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    Toast.makeText(getApplicationContext(),
+                            "Молодой человек, не прикасайтесь ко мне!",
+                            Toast.LENGTH_SHORT).show();
+                }
                 return false;
             }
-                return false;
-            }
-        }
-        );
+        });
             }
 
             ///////////////////////////////////////////////////////////////working
