@@ -21,6 +21,7 @@ public class Main2Activity extends AppCompatActivity {
         //Эти 2 строки создают новое активити и передают ему управление
         Intent intent = new Intent(Main2Activity.this, i.layout.Main3Activity.class);
         intent.putExtra("header", "SpisokPokupok");
+        intent.putExtra("title", "Список покупок");
         startActivity(intent);
     }
     public void onClickabout (View view)
@@ -32,9 +33,18 @@ public class Main2Activity extends AppCompatActivity {
     {
         try {
             Intent intent = new Intent(Main2Activity.this, SpisokProduktov.class);
-            // Передача данных между окнами (ключ-значение)
-            //intent.putExtra("header", "SpisokProductov");
             startActivity(intent);
         }catch (Exception e){}
+    }
+    private static long back_pressed;
+
+    @Override
+    public void onBackPressed() {
+        if (back_pressed + 2000 > System.currentTimeMillis())
+            this.finish();
+        else
+            Toast.makeText(getBaseContext(), "Нажмите \"Назад\" еще раз для выхода. ",
+                    Toast.LENGTH_SHORT).show();
+        back_pressed = System.currentTimeMillis();
     }
 }

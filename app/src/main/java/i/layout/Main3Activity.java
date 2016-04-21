@@ -2,6 +2,7 @@ package i.layout;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -15,6 +16,9 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.example.kitchenv12.AboutActivity;
+import com.example.kitchenv12.MainActivity;
 import com.example.kitchenv12.R;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -42,18 +46,21 @@ try {
     toolbar.setTitle("Список продуктов");
 }catch (Exception e)
 {
-    exept(e,"припилевании тулбара.");
+    exept(e,"припиливании тулбара.");
 }
 
 
             // Принимаем заголовок (имя файла хранения)
             final String header = getIntent().getStringExtra("header");
 
+            // Устанавливаем заготовок
+            Main3Activity.this.setTitle(getIntent().getStringExtra("title"));
+
+
             // Загрузка списка из файла
             final ArrayList<String> list = loadArrayList(header); // загружаем
 
             // Определение переменных
-
             ListView listView = (ListView) findViewById(R.id.listView);
             final EditText editText = (EditText) findViewById(R.id.editText);
 
@@ -71,6 +78,7 @@ try {
                                 list.add(0, editText.getText().toString());
                                 adapter.notifyDataSetChanged();
                                 editText.setText("");
+
                                 // Убирает клавиатуру, временный вариант
                                 editText.setEnabled(false);
                                 editText.setEnabled(true);
@@ -165,8 +173,20 @@ try {
                 "Приложение КухнЯ: Ошибка при " +doit+ "\r\n" + "Код ошибки: "+e, Toast.LENGTH_LONG);
         toast.show();
     }
-
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        //replaces the default 'Back' button action
+        if(keyCode == KeyEvent.KEYCODE_BACK)
+        {if(getIntent().getStringExtra("title").equals("Список покупок"))
+            {
+                Intent intent = new Intent(Main3Activity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        }
+        return true;
     }
+}
 
 
 

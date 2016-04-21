@@ -20,7 +20,7 @@
         <activity
             android:name="i.layout.Main3Activity"
             android:label="@string/title_activity_main3"
-            android:parentActivityName="i.layout.Main2Activity"
+            android:parentActivityName="i.layout.SpisokProduktov"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -36,10 +36,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="i.layout.Main2Activity" />
         </activity>
-<<<<<<< HEAD
 
-=======
->>>>>>> parent of 8efae11... Добавить новое окно авторизации
     </application>
 
 </manifest>

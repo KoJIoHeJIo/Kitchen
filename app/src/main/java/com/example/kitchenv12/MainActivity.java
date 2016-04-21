@@ -192,8 +192,7 @@ public void LogIn (final SharedPreferences sp, final TextView message,final Auto
         });
             }
 
-            ///////////////////////////////////////////////////////////////working
-//Метод записи в файл
+
 
         }
 
