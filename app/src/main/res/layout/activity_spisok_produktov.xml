@@ -22,7 +22,8 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_spisok_produktov" />
+    <include layout="@layout/content_spisok_produktov"
+        android:id="@+id/toolbar"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
