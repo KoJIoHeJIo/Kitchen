@@ -37,6 +37,7 @@
             android:id="@+id/massage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:padding="1dp"
             android:text=""
             android:textSize="20sp"
@@ -52,6 +53,7 @@
         android:id="@+id/login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+            android:visibility="gone"
         android:hint="@string/prompt_login"
         android:inputType="text"
         android:maxLines="1"
@@ -63,6 +65,7 @@
             android:id="@+id/pass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:hint="@string/prompt_password"
             android:inputType="text"
             android:maxLines="1"
@@ -76,7 +79,7 @@
     android:layout_height="wrap_content"
     android:background="#ff8029"
     android:text="Регистрация"
-    android:visibility="invisible"
+    android:visibility="gone"
     android:enabled="false"
     android:layout_gravity="right" />
 
@@ -85,6 +88,7 @@
             android:layout_width="match_parent"
             android:layout_height="357dp"
             android:id="@+id/imageButton"
+
             android:cropToPadding="true"
             android:background="@drawable/mainico"
             android:layout_alignParentRight="true"
