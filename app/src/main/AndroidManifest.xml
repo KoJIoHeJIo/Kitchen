@@ -36,6 +36,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="i.layout.Main2Activity" />
         </activity>
+<<<<<<< HEAD
+
+=======
+>>>>>>> parent of 8efae11... Добавить новое окно авторизации
     </application>
 
 </manifest>
