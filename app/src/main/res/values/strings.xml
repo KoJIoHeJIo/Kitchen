@@ -15,5 +15,17 @@
 
     Ведущий Арт-Дизайнер\n
         <b>Бензак Александр</b></string>
-    <string name="title_activity_spisok_produktov">SpisokProduktov</string>
+    <string name="title_activity_spisok_produktov">Продукты</string>
+
+    <string-array name="SistemSpProd">
+        <item>Холодильник</item>
+        <item>Морозильник</item>
+        <item>Кладовка</item>
+        <item>Шкаф</item>
+        <item>Ящик</item>
+        <item>Полка</item>
+        <item>Тумба</item>
+        <item>Пушок</item>
+    </string-array>
+
 </resources>
