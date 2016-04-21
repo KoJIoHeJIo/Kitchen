@@ -36,15 +36,4 @@ public class Main2Activity extends AppCompatActivity {
             startActivity(intent);
         }catch (Exception e){}
     }
-    private static long back_pressed;
-
-    @Override
-    public void onBackPressed() {
-        if (back_pressed + 2000 > System.currentTimeMillis())
-            this.finish();
-        else
-            Toast.makeText(getBaseContext(), "Нажмите \"Назад\" еще раз для выхода. ",
-                    Toast.LENGTH_SHORT).show();
-        back_pressed = System.currentTimeMillis();
-    }
 }

@@ -26,7 +26,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="i.layout.Main2Activity" />
         </activity>
-        <activity android:name=".AboutActivity" />
+        <activity android:name=".AboutActivity"
+            android:label="О программе"
+            />
         <activity
             android:name="i.layout.SpisokProduktov"
             android:label="@string/title_activity_spisok_produktov"
