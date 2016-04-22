@@ -16,25 +16,29 @@
             </intent-filter>
         </activity>
         <activity android:name="i.layout.Main2Activity" />
-        <activity
-            android:name="list.layout.Main3Activity"
-            android:label="@string/title_activity_main3"
-            android:parentActivityName="i.layout.Main2Activity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="i.layout.Main2Activity" />
-        </activity>
+
         <activity
             android:name="i.layout.Main3Activity"
             android:label="@string/title_activity_main3"
+            android:parentActivityName="i.layout.SpisokProduktov"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="i.layout.Main2Activity" />
+        </activity>
+        <activity android:name=".AboutActivity"
+            android:label="О программе"
+            />
+        <activity
+            android:name="i.layout.SpisokProduktov"
+            android:label="@string/title_activity_spisok_produktov"
             android:parentActivityName="i.layout.Main2Activity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="i.layout.Main2Activity" />
         </activity>
-        <activity android:name=".AboutActivity"></activity>
+
     </application>
 
 </manifest>

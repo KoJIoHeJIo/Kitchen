@@ -1,10 +1,5 @@
 <resources>
     <string name="app_name">КухнЯ</string>
-    <string-array name="shopping_list">
-        <item>Хлеб белый</item>
-        <item>Сметана</item>
-        <item>Яйца</item>
-    </string-array>
 
     <string name="title_activity_instruct">instruct</string>
     <string name="dummy_button">Dummy Button</string>
@@ -20,4 +15,22 @@
 
     Ведущий Арт-Дизайнер\n
         <b>Бензак Александр</b></string>
+
+    <string name="title_activity_spisok_produktov">Продукты</string>
+
+    <string-array name="SistemSpProd">
+        <item>Холодильник</item>
+        <item>Морозильник</item>
+        <item>Кладовка</item>
+        <item>Шкаф</item>
+        <item>Ящик</item>
+        <item>Полка</item>
+        <item>Тумба</item>
+        <item>Пушок</item>
+    </string-array>
+
+    <string name="prompt_login">Логин</string>
+    <string name="prompt_password">Пароль</string>
+
+
 </resources>
