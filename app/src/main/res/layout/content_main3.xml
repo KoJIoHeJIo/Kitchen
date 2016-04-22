@@ -56,7 +56,7 @@
 
         <TextView
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="20dp"
             android:layout_width="279dp"
             android:layout_height="wrap_content"
             android:text="Список покупок"

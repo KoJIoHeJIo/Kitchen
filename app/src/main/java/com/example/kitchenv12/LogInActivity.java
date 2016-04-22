@@ -17,7 +17,7 @@ import android.widget.Toast;
 import i.layout.MenuActivity;
 
 
-public class MainActivity extends AppCompatActivity {
+public class LogInActivity extends AppCompatActivity {
     private static final String MY_SETTINGS = "first";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -181,7 +181,7 @@ public void LogIn (final SharedPreferences sp, final TextView message,final Auto
             public void run() {
                 try {
                     // Создание нового активити и передача ему управления
-                    Intent intent = new Intent(MainActivity.this, MenuActivity.class);
+                    Intent intent = new Intent(LogInActivity.this, MenuActivity.class);
                     startActivity(intent);
                 } catch (Exception e) {
                     Toast toast = Toast.makeText(getApplicationContext(),

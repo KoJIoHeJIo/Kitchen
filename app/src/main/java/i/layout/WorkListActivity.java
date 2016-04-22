@@ -18,7 +18,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.kitchenv12.MainActivity;
+import com.example.kitchenv12.LogInActivity;
 import com.example.kitchenv12.R;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -183,7 +183,7 @@ try {
         if(keyCode == KeyEvent.KEYCODE_BACK)
         {if(getIntent().getStringExtra("title").equals("Список покупок"))
             {
-                Intent intent = new Intent(WorkListActivity.this, MainActivity.class);
+                Intent intent = new Intent(WorkListActivity.this, LogInActivity.class);
                 startActivity(intent);
             }
         }

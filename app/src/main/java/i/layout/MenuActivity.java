@@ -6,7 +6,6 @@ import android.view.View;
 import android.content.Intent;
 
 import com.example.kitchenv12.AboutActivity;
-import com.example.kitchenv12.MainActivity;
 import com.example.kitchenv12.R;
 
 public class MenuActivity extends AppCompatActivity {
