@@ -4,12 +4,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.content.Intent;
-import android.widget.Toast;
 
 import com.example.kitchenv12.AboutActivity;
 import com.example.kitchenv12.R;
 
-public class Main2Activity extends AppCompatActivity {
+public class MenuActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,20 +20,20 @@ public class Main2Activity extends AppCompatActivity {
     {
 
         //Эти 2 строки создают новое активити и передают ему управление
-        Intent intent = new Intent(Main2Activity.this, i.layout.Main3Activity.class);
+        Intent intent = new Intent(MenuActivity.this, WorkListActivity.class);
         intent.putExtra("header", "SpisokPokupok");
         intent.putExtra("title", "Список покупок");
         startActivity(intent);
     }
     public void onClickabout (View view)
     {
-        Intent intent = new Intent(Main2Activity.this, AboutActivity.class);
+        Intent intent = new Intent(MenuActivity.this, AboutActivity.class);
         startActivity(intent);
     }
     public void onClickprod (View view)
     {
         try {
-            Intent intent = new Intent(Main2Activity.this, SpisokProduktov.class);
+            Intent intent = new Intent(MenuActivity.this, SpisokProduktov.class);
             startActivity(intent);
         }catch (Exception e){}
     }

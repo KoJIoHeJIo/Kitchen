@@ -18,13 +18,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.kitchenv12.AboutActivity;
 import com.example.kitchenv12.MainActivity;
 import com.example.kitchenv12.R;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Main3Activity extends AppCompatActivity{
+public class WorkListActivity extends AppCompatActivity{
 
         @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,7 +54,7 @@ try {
             final String header = getIntent().getStringExtra("header");
 
             // Устанавливаем заготовок
-            Main3Activity.this.setTitle(getIntent().getStringExtra("title"));
+            WorkListActivity.this.setTitle(getIntent().getStringExtra("title"));
             final TextView logo = (TextView) findViewById(R.id.textView3);
             logo.setText(getIntent().getStringExtra("title"));
 
@@ -68,7 +67,7 @@ try {
             final EditText editText = (EditText) findViewById(R.id.editText);
 
             // Адаптер для отображения списка в listView
-            final ArrayAdapter<String> adapter = new ArrayAdapter<String>(Main3Activity.this, android.R.layout.simple_list_item_1, list);
+            final ArrayAdapter<String> adapter = new ArrayAdapter<String>(WorkListActivity.this, android.R.layout.simple_list_item_1, list);
             listView.setAdapter(adapter);
 
             // Обработчик нажатия на клавиатуре Enter и созранения нового элемента списка
@@ -122,7 +121,7 @@ try {
 
             // Метод вызова диалога, с выбором функций для элемента списка
             private void openQuitDialog(final ArrayAdapter<String> adapter,final String selectedItem,final EditText editText, final ArrayList<String> list) {
-                AlertDialog.Builder quitDialog = new AlertDialog.Builder(Main3Activity.this);
+                AlertDialog.Builder quitDialog = new AlertDialog.Builder(WorkListActivity.this);
                 quitDialog.setTitle("Выбран элемент : " + selectedItem);
 
                 quitDialog.setPositiveButton("Удалить ", new DialogInterface.OnClickListener() {
@@ -184,7 +183,7 @@ try {
         if(keyCode == KeyEvent.KEYCODE_BACK)
         {if(getIntent().getStringExtra("title").equals("Список покупок"))
             {
-                Intent intent = new Intent(Main3Activity.this, MainActivity.class);
+                Intent intent = new Intent(WorkListActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         }

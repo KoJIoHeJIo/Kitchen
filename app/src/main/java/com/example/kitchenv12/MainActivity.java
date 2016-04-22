@@ -5,17 +5,16 @@ import android.content.SharedPreferences;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.content.Intent;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-import java.io.File;
+
+import i.layout.MenuActivity;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -180,7 +179,7 @@ public void LogIn (final SharedPreferences sp, final TextView message,final Auto
             public void run() {
                 try {
                     // Создание нового активити и передача ему управления
-                    Intent intent = new Intent(MainActivity.this, i.layout.Main2Activity.class);
+                    Intent intent = new Intent(MainActivity.this, MenuActivity.class);
                     startActivity(intent);
                 } catch (Exception e) {
                     Toast toast = Toast.makeText(getApplicationContext(),
