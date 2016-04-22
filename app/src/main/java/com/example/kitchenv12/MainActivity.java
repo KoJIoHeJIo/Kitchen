@@ -36,8 +36,10 @@ public class MainActivity extends AppCompatActivity {
         final AutoCompleteTextView pass = (AutoCompleteTextView) findViewById(R.id.pass);
         // Поле ввода логина
         final AutoCompleteTextView login = (AutoCompleteTextView) findViewById(R.id.login);
+        // Кнопка регистрации
+        final Button goon = (Button) findViewById(R.id.goon);
 
-       // Заставка на 2 секунды
+        // Заставка на 2 секунды
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() { ib.setVisibility(View.INVISIBLE);
@@ -46,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         final SharedPreferences sp = getSharedPreferences(MY_SETTINGS,
                 Context.MODE_PRIVATE);
         boolean hasVisited = sp.getBoolean("hasVisited", false);
+        // Параметр для меню управления паролем.
         boolean passon = sp.getBoolean("passon", false);
 
         if (!hasVisited) {
@@ -57,46 +60,17 @@ public class MainActivity extends AppCompatActivity {
              // Подтверждение действия
             e.apply();
             // Принудительный процесс регистрации
-           // registration(sp,message,login,pass);
-            LogIn(sp, message, login, pass);
-        }
-            else{
-            // Начинаем процесс авторизации
-                LogIn(sp, message, login, pass);
-                }
 
+        }
+                LogIn(sp, message, login, pass,goon);
 
             }
         }, 2000);
 
     }
 
-
-    // Вход в основную часть программы
-    public void comeIn ()
-    {
-    // Таймер отображения заставки, по окончании делает ее невидимой и начинает авторизацию
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    // Создание нового активити и передача ему управления
-                    Intent intent = new Intent(MainActivity.this, i.layout.Main2Activity.class);
-                    startActivity(intent);
-                } catch (Exception e) {
-                    Toast toast = Toast.makeText(getApplicationContext(),
-                            "Приложение КухнЯ: Ошибка." + "\r\n" + "Переход на Главное меню не возможен" + "\r\n" + e, Toast.LENGTH_LONG);
-                    toast.show();
-                }
-            }
-        }, 1500);
-    }
-
-
-
-    ///////////////////////////////////////////////////working
-
-public void LogIn (final SharedPreferences sp, final TextView message,final AutoCompleteTextView login,final AutoCompleteTextView pass )
+// Метод авторизации.
+public void LogIn (final SharedPreferences sp, final TextView message,final AutoCompleteTextView login,final AutoCompleteTextView pass, final Button goon )
 {
     String name = sp.getString("login",new String());
     final String password = sp.getString("password",new String());
@@ -108,14 +82,13 @@ public void LogIn (final SharedPreferences sp, final TextView message,final Auto
        message.setVisibility(View.VISIBLE);
        login.setText(name);
        message.setText("Здравствуй " + name);
-       comeIn();
+       comeIn(message, login, pass, goon);
    }
     else if(!name.equals("") && !password.equals(""))
    {
        message.setVisibility(View.VISIBLE);
        pass.setVisibility(View.VISIBLE);
        login.setVisibility(View.VISIBLE);
-       final Button goon = (Button) findViewById(R.id.goon);
        goon.setVisibility(View.VISIBLE);
        goon.setText("Войти");
        goon.setEnabled(true);
@@ -137,7 +110,7 @@ public void LogIn (final SharedPreferences sp, final TextView message,final Auto
                                                // Проверка верности пароля
                                                if (pass.getText().toString().equals(vrpass)) {
                                                    message.setText("Добро пожаловать " + login.getText().toString());
-                                                   comeIn();
+                                                   comeIn(message, login, pass, goon);
                                                    return true;
                                                }
                                                // Пароль неверный
@@ -184,7 +157,7 @@ public void LogIn (final SharedPreferences sp, final TextView message,final Auto
                         if(!pass.getText().toString().equals("")){e.putString("password", pass.getText().toString());}
                         e.apply();
                         e.commit();
-                    comeIn();
+                    comeIn(message, login, pass, goon);
                     }
                 }
                 return false;
@@ -192,6 +165,31 @@ public void LogIn (final SharedPreferences sp, final TextView message,final Auto
         });
             }
 
+    // Вход в основную часть программы
+    public void comeIn (final TextView message,final AutoCompleteTextView login,final AutoCompleteTextView pass, final Button goon)
+    {
+
+        final ImageButton ib = (ImageButton) findViewById(R.id.imageButton);
+        ib.setVisibility(View.VISIBLE);
+        pass.setVisibility(View.GONE);
+        login.setVisibility(View.GONE);
+        goon.setVisibility(View.GONE);
+        // Таймер отображения заставки, по окончании делает ее невидимой и начинает авторизацию
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    // Создание нового активити и передача ему управления
+                    Intent intent = new Intent(MainActivity.this, i.layout.Main2Activity.class);
+                    startActivity(intent);
+                } catch (Exception e) {
+                    Toast toast = Toast.makeText(getApplicationContext(),
+                            "Приложение КухнЯ: Ошибка." + "\r\n" + "Переход на Главное меню не возможен" + "\r\n" + e, Toast.LENGTH_LONG);
+                    toast.show();
+                }
+            }
+        }, 1500);
+    }
 
 
         }

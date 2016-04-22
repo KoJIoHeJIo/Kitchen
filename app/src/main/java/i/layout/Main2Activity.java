@@ -15,9 +15,11 @@ public class Main2Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+
     }
     public void onClick (View view)
     {
+
         //Эти 2 строки создают новое активити и передают ему управление
         Intent intent = new Intent(Main2Activity.this, i.layout.Main3Activity.class);
         intent.putExtra("header", "SpisokPokupok");

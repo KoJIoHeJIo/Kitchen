@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.kitchenv12.R;
@@ -34,6 +35,8 @@ public class SpisokProduktov extends AppCompatActivity {
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setTitle("Продукты");
+        final TextView logo = (TextView) findViewById(R.id.textView3);
+        logo.setText("Продукты");
 
 
         ListView listView = (ListView)findViewById(R.id.listView);

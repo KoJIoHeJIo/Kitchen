@@ -35,28 +35,39 @@
         android:clickable="true" />
 
     <FrameLayout
-        android:layout_marginBottom="35dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignBottom="@+id/editText">
-
-        <TextView
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Список покупок"
-            android:id="@+id/textView3"
-            android:layout_gravity="top|left|center"
-            android:textSize="30dp"
-            android:textIsSelectable="true"
-            android:focusableInTouchMode="true"
-
-            />
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true">
 
 
+        <FrameLayout
+            android:layout_marginBottom="35dp"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:layout_alignBottom="@+id/editText"
+            android:layout_gravity="center_horizontal|top">
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"
+                android:layout_width="279dp"
+                android:layout_height="wrap_content"
+                android:text="Список покупок"
+                android:id="@+id/textView3"
+                android:layout_gravity="right|top"
+                android:textSize="30dp"
+                android:textIsSelectable="true"
+                android:focusableInTouchMode="true" />
+
+            <ImageView
+                android:layout_width="53dp"
+                android:layout_height="match_parent"
+                android:id="@+id/imageView2"
+                android:layout_gravity="left"
+                android:src="@drawable/back" />
+        </FrameLayout>
     </FrameLayout>
 
 </RelativeLayout>

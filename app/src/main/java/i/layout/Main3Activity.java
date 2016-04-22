@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.kitchenv12.AboutActivity;
@@ -55,6 +56,8 @@ try {
 
             // Устанавливаем заготовок
             Main3Activity.this.setTitle(getIntent().getStringExtra("title"));
+            final TextView logo = (TextView) findViewById(R.id.textView3);
+            logo.setText(getIntent().getStringExtra("title"));
 
 
             // Загрузка списка из файла
@@ -150,13 +153,14 @@ try {
             }
 
     // Сохранение списка в файл
-    private void saveArrayList(String name, ArrayList<String> list) {
+    private boolean saveArrayList(String name, ArrayList<String> list) {
         SharedPreferences prefs = getSharedPreferences("myPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         StringBuilder sb = new StringBuilder();
         for (String s : list) sb.append(s).append("<s>");
         sb.delete(sb.length() - 3, sb.length());
         editor.putString(name, sb.toString()).apply();
+        return true;
     }
 // Загрузка списка из файла
     private ArrayList<String> loadArrayList(String name) {
