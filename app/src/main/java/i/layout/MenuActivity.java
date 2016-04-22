@@ -6,6 +6,7 @@ import android.view.View;
 import android.content.Intent;
 
 import com.example.kitchenv12.AboutActivity;
+import com.example.kitchenv12.MainActivity;
 import com.example.kitchenv12.R;
 
 public class MenuActivity extends AppCompatActivity {
@@ -18,7 +19,6 @@ public class MenuActivity extends AppCompatActivity {
     }
     public void onClick (View view)
     {
-
         //Эти 2 строки создают новое активити и передают ему управление
         Intent intent = new Intent(MenuActivity.this, WorkListActivity.class);
         intent.putExtra("header", "SpisokPokupok");

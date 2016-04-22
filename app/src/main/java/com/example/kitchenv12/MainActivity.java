@@ -55,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
             e.putBoolean("hasVisited", true);
             e.putString("login", "");
             e.putString("password", "");
-            e.commit();
              // Подтверждение действия
             e.apply();
             // Принудительный процесс регистрации
@@ -69,60 +68,62 @@ public class MainActivity extends AppCompatActivity {
     }
 
 // Метод авторизации.
-public void LogIn (final SharedPreferences sp, final TextView message,final AutoCompleteTextView login,final AutoCompleteTextView pass, final Button goon )
+public void LogIn (final SharedPreferences sp, final TextView message,final AutoCompleteTextView login,final AutoCompleteTextView pass, final Button GoOnButton )
 {
-    String name = sp.getString("login",new String());
+    final String name = sp.getString("login",new String());
     final String password = sp.getString("password",new String());
     // Если имя пользователя не указано
-   if(name.equals("")){registration(sp,message,login,pass);}
+   if(name.equals("")){
+       Registration(sp, message, login, pass);}
     // Если имя указанно и пароль не указан
     else if(!name.equals("") && password.equals(""))
    {
        message.setVisibility(View.VISIBLE);
        login.setText(name);
-       message.setText("Здравствуй " + name);
-       comeIn(message, login, pass, goon);
+       message.setText("Добро пожаловать " + name);
+       ComeInMenu(login, pass, GoOnButton);
    }
     else if(!name.equals("") && !password.equals(""))
    {
        message.setVisibility(View.VISIBLE);
        pass.setVisibility(View.VISIBLE);
        login.setVisibility(View.VISIBLE);
-       goon.setVisibility(View.VISIBLE);
-       goon.setText("Войти");
-       goon.setEnabled(true);
+       GoOnButton.setVisibility(View.VISIBLE);
+       GoOnButton.setText("Войти");
+       GoOnButton.setEnabled(true);
        login.setText(name);
        login.setEnabled(false);
        message.setText("Введите пароль");
-       goon.setOnTouchListener(new View.OnTouchListener() {
+       GoOnButton.setOnTouchListener(new View.OnTouchListener() {
 
-                                   @Override
-                                   public boolean onTouch(View v, MotionEvent event) {
-                                       if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                                         @Override
+                                         public boolean onTouch(View v, MotionEvent event) {
+                                             if (event.getAction() == MotionEvent.ACTION_DOWN) {
 
-                                               // Проверка на пустой пароль
-                                               if (pass.getText().length() == 0) {
-                                                   message.setText("Пароль не может быть пустым");
-                                                   return false;
-                                               }
-                                               String vrpass = sp.getString("password", new String());
-                                               // Проверка верности пароля
-                                               if (pass.getText().toString().equals(vrpass)) {
-                                                   message.setText("Добро пожаловать " + login.getText().toString());
-                                                   comeIn(message, login, pass, goon);
-                                                   return true;
-                                               }
-                                               // Пароль неверный
-                                               else {
-                                                   message.setText("Пароль невереный!");
-                                                   return false;
-                                               }
+                                                 // Проверка на пустой пароль
+                                                 if (pass.getText().length() == 0) {
+                                                     message.setText("Пароль не может быть пустым");
+                                                     return false;
+                                                 }
+                                                 String vrpass = sp.getString("password", new String());
+                                                 // Проверка верности пароля
+                                                 if (pass.getText().toString().equals(vrpass)) {
+                                                     String name = login.getText().toString();
+                                                     message.setText("Добро пожаловать " + name );
+                                                     ComeInMenu(login, pass, GoOnButton);
+                                                     return true;
+                                                 }
+                                                 // Пароль неверный
+                                                 else {
+                                                     message.setText("Пароль невереный!");
+                                                     return false;
+                                                 }
 
-                                           }
-                                       return false;
-                                       }
+                                             }
+                                             return false;
+                                         }
 
-                                   }
+                                     }
 
        );
 
@@ -132,7 +133,7 @@ public void LogIn (final SharedPreferences sp, final TextView message,final Auto
 
 
     // Регистрация нового пользователя
-    private void registration(final SharedPreferences sp,final TextView message,final AutoCompleteTextView login,final AutoCompleteTextView pass )
+    private void Registration(final SharedPreferences sp, final TextView message, final AutoCompleteTextView login, final AutoCompleteTextView pass)
     {
         message.setVisibility(View.VISIBLE);
         pass.setVisibility(View.VISIBLE);
@@ -140,7 +141,7 @@ public void LogIn (final SharedPreferences sp, final TextView message,final Auto
         final Button goon = (Button) findViewById(R.id.goon);
         goon.setEnabled(true);
         goon.setVisibility(View.VISIBLE);
-        String hello = "Введите логин и, при необходимости, пароль ";
+        String hello = "Введите ваш новый логин и пароль ";
         message.setText(hello);
         login.isFocusable();
         // Проверка на нажатие кнопки Авторизации
@@ -151,12 +152,13 @@ public void LogIn (final SharedPreferences sp, final TextView message,final Auto
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     if(login.getText().toString().equals("")){message.setText("Вы забыли ввести Логин.");}
                          else {
+                        String name = login.getText().toString();
+                        message.setText("Добро пожаловать " + name );
                         SharedPreferences.Editor e = sp.edit();
                         e.putString("login", login.getText().toString());
                         if(!pass.getText().toString().equals("")){e.putString("password", pass.getText().toString());}
                         e.apply();
-                        e.commit();
-                    comeIn(message, login, pass, goon);
+                    ComeInMenu(login, pass, goon);
                     }
                 }
                 return false;
@@ -165,7 +167,7 @@ public void LogIn (final SharedPreferences sp, final TextView message,final Auto
             }
 
     // Вход в основную часть программы
-    public void comeIn (final TextView message,final AutoCompleteTextView login,final AutoCompleteTextView pass, final Button goon)
+    public void ComeInMenu(final AutoCompleteTextView login, final AutoCompleteTextView pass, final Button goon)
     {
 
         final ImageButton ib = (ImageButton) findViewById(R.id.imageButton);

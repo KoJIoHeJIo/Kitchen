@@ -30,7 +30,9 @@
     </string-array>
 
     <string name="prompt_login">Логин</string>
-    <string name="prompt_password">Пароль</string>
-
-
+    <string name="prompt_password">Пароль (Можно оставить пустым)</string>
+    <string name="error_login">Пароль (Можно оставить пустым)</string>
+    <string name="error_pass">Пароль (Можно оставить пустым)</string>
+    <string name="registration">Введите ваш новый логин и пароль</string>
+    <string name="lost_login">Вы забыли ввести Логин</string>
 </resources>
