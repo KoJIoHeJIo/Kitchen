@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.kitchenv12">
+    package="com.example.LoginAndComeIn">
 
     <application
         android:allowBackup="true"
@@ -16,7 +16,6 @@
             </intent-filter>
         </activity>
         <activity android:name="i.layout.MenuActivity" />
-
         <activity
             android:name="i.layout.WorkListActivity"
             android:label="@string/title_activity_main3"
@@ -26,9 +25,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="i.layout.MenuActivity" />
         </activity>
-        <activity android:name=".AboutActivity"
-            android:label="О программе"
-            />
+        <activity
+            android:name="i.layout.AboutActivity"
+            android:label="О программе" />
         <activity
             android:name="i.layout.SpisokProduktov"
             android:label="@string/title_activity_spisok_produktov"
@@ -38,7 +37,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="i.layout.MenuActivity" />
         </activity>
-
+        <activity
+            android:name="i.layout.Cookbook"
+            android:label="@string/title_activity_cookbook"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

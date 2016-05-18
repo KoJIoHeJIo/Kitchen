@@ -5,8 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.content.Intent;
 
-import com.example.kitchenv12.AboutActivity;
-import com.example.kitchenv12.R;
+import com.example.LoginAndComeIn.R;
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -16,7 +15,7 @@ public class MenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main2);
 
     }
-    public void onClick (View view)
+    public void onClicktolist (View view)
     {
         //Эти 2 строки создают новое активити и передают ему управление
         Intent intent = new Intent(MenuActivity.this, WorkListActivity.class);
@@ -24,15 +23,22 @@ public class MenuActivity extends AppCompatActivity {
         intent.putExtra("title", "Список покупок");
         startActivity(intent);
     }
-    public void onClickabout (View view)
+    public void onClicktoabout (View view)
     {
         Intent intent = new Intent(MenuActivity.this, AboutActivity.class);
         startActivity(intent);
     }
-    public void onClickprod (View view)
+    public void onClicktofood (View view)
     {
         try {
             Intent intent = new Intent(MenuActivity.this, SpisokProduktov.class);
+            startActivity(intent);
+        }catch (Exception e){}
+    }
+    public void onClicktobook (View view)
+    {
+        try {
+            Intent intent = new Intent(MenuActivity.this, Cookbook.class);
             startActivity(intent);
         }catch (Exception e){}
     }

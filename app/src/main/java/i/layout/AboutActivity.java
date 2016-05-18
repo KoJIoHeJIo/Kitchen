@@ -1,7 +1,9 @@
-package com.example.kitchenv12;
+package i.layout;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.LoginAndComeIn.R;
 
 public class AboutActivity extends AppCompatActivity {
     @Override

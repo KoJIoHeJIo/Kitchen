@@ -18,13 +18,18 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.kitchenv12.LogInActivity;
-import com.example.kitchenv12.R;
+import com.example.LoginAndComeIn.LogInActivity;
+import com.example.LoginAndComeIn.R;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class WorkListActivity extends AppCompatActivity{
+ArrayList<String> a=new ArrayList<>();
 
+    {
+        a.add("sdf");
+    }
         @Override
     public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -127,7 +132,7 @@ try {
                 quitDialog.setPositiveButton("Удалить ", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // TODO Auto-generated method stub
+
                         adapter.remove(selectedItem);
                         list.remove(selectedItem);
                         // Сохранения списка после удаления
@@ -141,7 +146,7 @@ try {
                 quitDialog.setNegativeButton("Редактировать ", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // TODO Auto-generated method stub
+
                         editText.setText(selectedItem);
                         adapter.remove(selectedItem);
                         editText.requestFocus();

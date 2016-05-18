@@ -1,4 +1,4 @@
-package com.example.kitchenv12;
+package com.example.LoginAndComeIn;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
