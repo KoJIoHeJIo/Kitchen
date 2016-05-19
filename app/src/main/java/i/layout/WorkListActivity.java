@@ -169,8 +169,13 @@ try {
             }
         }
 
-
-            // Метод вызова диалога, с выбором функций для элемента списка
+    /**
+     * Открывает диалог для выбора действия с выбранным элементом списка.
+     * @param adapter - Адаптер списка
+     * @param selectedItem - Номер позиции выбранного элемента списка
+     * @param editText - Форма ввода текста
+     * @param list - Список
+     */
             private void openQuitDialog(final ArrayAdapter<String> adapter,final String selectedItem,final EditText editText, final ArrayList<String> list) {
                 AlertDialog.Builder quitDialog = new AlertDialog.Builder(WorkListActivity.this);
                 quitDialog.setTitle("Выбран элемент : " + selectedItem);
@@ -202,7 +207,12 @@ try {
                 quitDialog.show();
             }
 
-    // Сохранение списка в файл
+    /**
+     *Сохранение списка в файл
+     * @param name - Название списка
+     * @param list - Список
+     * @return - булеан успеха/неудачи операции
+     */
     private boolean saveArrayList(String name, ArrayList<String> list) {
         SharedPreferences prefs = getSharedPreferences("myPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
@@ -213,6 +223,12 @@ try {
         return true;
     }
 // Загрузка списка из файла
+
+    /**
+     * Загрузка списка из файла
+     * @param name - Название списка
+     * @return - Список
+     */
     private ArrayList<String> loadArrayList(String name) {
         SharedPreferences prefs = getSharedPreferences("myPrefs", MODE_PRIVATE);
         String[] strings = prefs.getString(name, "").split("<s>");
@@ -221,6 +237,12 @@ try {
         return list;
     }
     // Сообщение об ошибке (код ошибки, имя действия)
+
+    /**
+     * Выводит сообщение об ошибке.
+     * @param e - Код ошибки
+     * @param doit - Описание ошибки
+     */
     public void exept(Exception e, String doit)
     {
         Toast toast = Toast.makeText(getApplicationContext(),
@@ -228,15 +250,23 @@ try {
         toast.show();
     }
     @Override
+    /**
+     * Слушатель действия нажатия на кнопку "Назад"
+     */
     public boolean onKeyDown(int keyCode, KeyEvent event)
     {
         //replaces the default 'Back' button action
         if(keyCode == KeyEvent.KEYCODE_BACK)
         {if(getIntent().getStringExtra("title").equals("Список покупок"))
             {
-                Intent intent = new Intent(WorkListActivity.this, LogInActivity.class);
+                Intent intent = new Intent(WorkListActivity.this, MenuActivity.class);
                 startActivity(intent);
             }
+                else
+                    {
+                        Intent intent = new Intent(WorkListActivity.this, SpisokProduktov.class);
+                        startActivity(intent);
+                    }
         }
         return true;
     }
