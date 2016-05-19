@@ -5,9 +5,12 @@ import android.os.Bundle;
 
 import com.example.LoginAndComeIn.R;
 
+/**
+ * О программе
+ */
 public class AboutActivity extends AppCompatActivity {
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+   final protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
     }

@@ -73,7 +73,8 @@
             android:layout_height="match_parent"
             android:id="@+id/imageView"
             android:layout_gravity="left"
-            android:src="@drawable/back" />
+            android:src="@drawable/back"
+            tools:ignore="ContentDescription" />
 
 
     </FrameLayout>

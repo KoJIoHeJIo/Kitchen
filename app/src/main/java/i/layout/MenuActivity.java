@@ -48,7 +48,7 @@ public class MenuActivity extends AppCompatActivity {
         try {
             Intent intent = new Intent(MenuActivity.this, SpisokProduktov.class);
             startActivity(intent);
-        }catch (Exception e){}
+        }catch (Exception ignored){}
     }
 
     /**
@@ -62,6 +62,6 @@ public class MenuActivity extends AppCompatActivity {
             Intent intent = new Intent(MenuActivity.this, ShowCookBook.class);
             startActivity(intent);
 
-        }catch (Exception e){}
+        }catch (Exception ignored){}
     }
 }

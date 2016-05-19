@@ -32,7 +32,8 @@
             android:shadowRadius="8"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            tools:ignore="ObsoleteLayoutParam" />
         <TextView
             android:id="@+id/massage"
             android:layout_width="wrap_content"
@@ -94,7 +95,8 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:clickable="true"
-            android:layout_gravity="top|bottom|center_horizontal" />
+            android:layout_gravity="top|bottom|center_horizontal"
+            tools:ignore="ContentDescription" />
 
     </LinearLayout>
 

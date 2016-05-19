@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,8 +12,6 @@ import android.content.res.Resources;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
@@ -26,14 +23,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.LoginAndComeIn.LogInActivity;
 import com.example.LoginAndComeIn.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class WorkListActivity extends AppCompatActivity{
-ArrayList<String> a=new ArrayList<>();
+@SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
+private final ArrayList<String> a = new ArrayList<>();
     private static final int NOTIFY_ID = 101;
 
     {
@@ -66,19 +63,19 @@ try {
             builder.setContentIntent(contentIntent)
                     .setSmallIcon(R.drawable.mainico)
                             // большая картинка
-                    .setLargeIcon(BitmapFactory.decodeResource(res, R.drawable.mainico))
+                    .setLargeIcon(BitmapFactory.decodeResource(res, R.drawable.surprise))
                             //.setTicker(res.getString(R.string.warning)) // текст в строке состояния
-                    .setTicker("Последнее китайское предупреждение!")
-                    .setWhen(System.currentTimeMillis())
+                    .setTicker("Ты просил напомнить тебе...!")
+                    .setWhen(System.currentTimeMillis()+1500)
                     .setAutoCancel(true)
                             //.setContentTitle(res.getString(R.string.notifytitle)) // Заголовок уведомления
-                    .setContentTitle("Напоминание")
+                    .setContentTitle("Напоминашка")
                             //.setContentText(res.getString(R.string.notifytext))
-                    .setContentText("Пора покормить кота"); // Текст уведомления
+                    .setContentText("Время купить продукты!"); // Текст уведомления
 
             // Notification notification = builder.getNotification(); // до API 16
             try {
-                Notification notification = null;
+                Notification notification;
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
                     notification = builder.build();
                     NotificationManager notificationManager = (NotificationManager) context
@@ -87,14 +84,15 @@ try {
                 }
 
             }
-            catch (Exception e){}
+            catch (Exception ignored){}
 
 
 }//end block
     });
 
+    //noinspection ConstantConditions
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    toolbar.setTitle("Список продуктов");
+
 }catch (Exception e)
 {
     exept(e,"припиливании тулбара.");
@@ -118,7 +116,7 @@ try {
             final EditText editText = (EditText) findViewById(R.id.editText);
 
             // Адаптер для отображения списка в listView
-            final ArrayAdapter<String> adapter = new ArrayAdapter<String>(WorkListActivity.this, android.R.layout.simple_list_item_1, list);
+            final ArrayAdapter<String> adapter = new ArrayAdapter<>(WorkListActivity.this, android.R.layout.simple_list_item_1, list);
             listView.setAdapter(adapter);
 
             // Обработчик нажатия на клавиатуре Enter и созранения нового элемента списка
@@ -187,10 +185,8 @@ try {
                         adapter.remove(selectedItem);
                         list.remove(selectedItem);
                         // Сохранения списка после удаления
-                        try {
                             saveArrayList("Spisok_pokupok", list); // сохраняем
-                        } catch (Exception e)
-                        {exept(e,"сохранении списка в файл.");}
+
                     }
                 });
 
@@ -214,11 +210,14 @@ try {
      * @return - булеан успеха/неудачи операции
      */
     private boolean saveArrayList(String name, ArrayList<String> list) {
+
         SharedPreferences prefs = getSharedPreferences("myPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         StringBuilder sb = new StringBuilder();
-        for (String s : list) sb.append(s).append("<s>");
-        sb.delete(sb.length() - 3, sb.length());
+        if(sb.length()>3) {
+            for (String s : list) sb.append(s).append("<s>");
+            sb.delete(sb.length() - 3, sb.length());
+        }
         editor.putString(name, sb.toString()).apply();
         return true;
     }
@@ -243,7 +242,7 @@ try {
      * @param e - Код ошибки
      * @param doit - Описание ошибки
      */
-    public void exept(Exception e, String doit)
+    private void exept(Exception e, String doit)
     {
         Toast toast = Toast.makeText(getApplicationContext(),
                 "Приложение КухнЯ: Ошибка при " +doit+ "\r\n" + "Код ошибки: "+e, Toast.LENGTH_LONG);

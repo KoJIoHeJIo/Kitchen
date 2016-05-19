@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.LoginAndComeIn.R;
 
+@SuppressWarnings({"ALL", "ConstantConditions"})
 public class SpisokProduktov extends AppCompatActivity {
 
     @Override
@@ -42,7 +43,7 @@ public class SpisokProduktov extends AppCompatActivity {
         ListView listView = (ListView)findViewById(R.id.listView);
         String[] catnames = getResources().getStringArray(R.array.SistemSpProd);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,	android.R.layout.simple_list_item_1, catnames);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, catnames);
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
