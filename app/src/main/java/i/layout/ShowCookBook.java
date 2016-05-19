@@ -9,12 +9,12 @@ import android.view.View;
 
 import com.example.LoginAndComeIn.R;
 
-public class Cookbook extends AppCompatActivity {
+public class ShowCookBook extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cookbook);
+        setContentView(R.layout.activity_show_cook_book);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
