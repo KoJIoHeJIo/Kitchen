@@ -1,4 +1,4 @@
-﻿package i.layout;
+package i.layout;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
