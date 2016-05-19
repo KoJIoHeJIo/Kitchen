@@ -50,6 +50,7 @@ public class LogInActivity extends AppCompatActivity {
         // Параметр для меню управления паролем.
         boolean passon = sp.getBoolean("passon", false);
 
+
         if (!hasVisited) {
             SharedPreferences.Editor e = sp.edit();
             e.putBoolean("hasVisited", true);
@@ -67,7 +68,16 @@ public class LogInActivity extends AppCompatActivity {
 
     }
 
-// Метод авторизации.
+    /**
+     * Проводит авторизацию,
+     * проверяет наличие логина и пароля,
+     * сверяет полученный пароль с установленным.
+     * @param sp - Инструмент записи данны в память устройства
+     * @param message - Указатель на область вывода сообщений
+     * @param login -  текстовое поле для ввода логина
+     * @param pass - текстовое поле для ввода пароля
+     * @param GoOnButton - Кнопка действия
+     */
 public void LogIn (final SharedPreferences sp, final TextView message,final AutoCompleteTextView login,final AutoCompleteTextView pass, final Button GoOnButton )
 {
     final String name = sp.getString("login",new String());
@@ -80,7 +90,7 @@ public void LogIn (final SharedPreferences sp, final TextView message,final Auto
    {
        message.setVisibility(View.VISIBLE);
        login.setText(name);
-       message.setText("Добро пожаловать " + name);
+       message.setText("@string/welcome" + name);//TEST
        ComeInMenu(login, pass, GoOnButton);
    }
     else if(!name.equals("") && !password.equals(""))
@@ -109,7 +119,7 @@ public void LogIn (final SharedPreferences sp, final TextView message,final Auto
                                                  // Проверка верности пароля
                                                  if (pass.getText().toString().equals(vrpass)) {
                                                      String name = login.getText().toString();
-                                                     message.setText("Добро пожаловать " + name );
+                                                             message.setText("@string/welcome" + name);
                                                      ComeInMenu(login, pass, GoOnButton);
                                                      return true;
                                                  }
@@ -131,8 +141,14 @@ public void LogIn (final SharedPreferences sp, final TextView message,final Auto
 
 }
 
-
-    // Регистрация нового пользователя
+    /**
+     * Регистрация нового пользователя,
+     * запись данных нового пользователя на устройство
+     * @param sp - Инструмент записи настройки
+     * @param message - Указатель на область вывода сообщений
+     * @param login - Текстовое поле для ввода логина
+     * @param pass - Текстовое поле для ввода пароля
+     */
     private void Registration(final SharedPreferences sp, final TextView message, final AutoCompleteTextView login, final AutoCompleteTextView pass)
     {
         message.setVisibility(View.VISIBLE);
@@ -166,7 +182,13 @@ public void LogIn (final SharedPreferences sp, final TextView message,final Auto
         });
             }
 
-    // Вход в основную часть программы
+    /**
+     * Преход в основное меню,
+     * после прохождения регистрации или авторизации
+     * @param login - Текстовое поле для ввода логина
+     * @param pass - Текстовое поле для ввода пароля
+     * @param goon - Кнопка действия
+     */
     public void ComeInMenu(final AutoCompleteTextView login, final AutoCompleteTextView pass, final Button goon)
     {
 

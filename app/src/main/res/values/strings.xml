@@ -1,6 +1,5 @@
 ﻿<resources>
     <string name="app_name">КухнЯ</string>
-
     <string name="title_activity_instruct">instruct</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
@@ -36,10 +35,14 @@
     <string name="registration">Введите ваш новый логин и пароль</string>
     <string name="lost_login">Вы забыли ввести Логин</string>
     <string name="title_activity_cookbook">Cookbook</string>
-    <string name="large_text">
-       
-    </string>
-    <string name="action_settings">Settings</string>
+  <string name="action_settings">Settings</string>
+    <string name="welcome">Добро пожаловать </string>
+
+
+
+
+
+
 <string name="cook1">
 Этот десерт я называю «Гости на пороге». У меня всегда есть готовый бисквит. Крем можно приготовить за 10 минут. Быстро сделать десерт и дать ему настояться в холодильнике 1 час.
 \n <top>ИНГРЕДИЕНТЫ</top>\n
