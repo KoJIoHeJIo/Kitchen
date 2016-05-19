@@ -42,9 +42,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() { ib.setVisibility(View.INVISIBLE);
 
-            }
-        }, 2000);
-
         // Проверяем, первый ли раз запущенна программа
         final SharedPreferences sp = getSharedPreferences(MY_SETTINGS,
                 Context.MODE_PRIVATE);
@@ -54,8 +51,8 @@ public class MainActivity extends AppCompatActivity {
         if (!hasVisited) {
             SharedPreferences.Editor e = sp.edit();
             e.putBoolean("hasVisited", true);
-            e.putString("login", "admin");
-            e.putString("password", "admin");
+            e.putString("login", "");
+            e.putString("password", "");
             e.commit();
              // Подтверждение действия
             e.apply();
@@ -67,6 +64,10 @@ public class MainActivity extends AppCompatActivity {
             // Начинаем процесс авторизации
                 LogIn(sp, message, login, pass);
                 }
+
+
+            }
+        }, 2000);
 
     }
 
@@ -114,41 +115,43 @@ public void LogIn (final SharedPreferences sp, final TextView message,final Auto
        message.setVisibility(View.VISIBLE);
        pass.setVisibility(View.VISIBLE);
        login.setVisibility(View.VISIBLE);
+       final Button goon = (Button) findViewById(R.id.goon);
+       goon.setVisibility(View.VISIBLE);
+       goon.setText("Войти");
+       goon.setEnabled(true);
        login.setText(name);
        login.setEnabled(false);
        message.setText("Введите пароль");
-       pass.setOnKeyListener(new View.OnKeyListener() {
-                                          public boolean onKey(View v, int keyCode, KeyEvent event) {
-                                              if (event.getAction() == KeyEvent.ACTION_DOWN)
-                                              {
-                                                  if (keyCode == KeyEvent.KEYCODE_ENTER)
-                                                  {
-                                                      // Проверка на пустой пароль
-                                                      if (pass.getText().length() == 0) {
-                                                          message.setText("Пароль не может быть пустым");
-                                                          return false;
-                                                      }
-                                                      String vrpass = sp.getString("password",new String());
-                                                      // Проверка верности пароля
-                                                      if (pass.getText().toString().equals(vrpass)) {
-                                                          String userName = pass.getText().toString();
-                                                          message.setText("Здравствуй " + userName);
-                                                          comeIn();
-                                                          return true;
-                                                      }
-                                                      // Пароль неверный
-                                                      else
-                                                      {
-                                                          message.setText("Пароль невереный!");
-                                                          return false;
-                                                      }
+       goon.setOnTouchListener(new View.OnTouchListener() {
 
-                                                  }
-                                                      return false;
-                                              }
-                                              return false;
-                                          }
-                                      }
+                                   @Override
+                                   public boolean onTouch(View v, MotionEvent event) {
+                                       if (event.getAction() == MotionEvent.ACTION_DOWN) {
+
+                                               // Проверка на пустой пароль
+                                               if (pass.getText().length() == 0) {
+                                                   message.setText("Пароль не может быть пустым");
+                                                   return false;
+                                               }
+                                               String vrpass = sp.getString("password", new String());
+                                               // Проверка верности пароля
+                                               if (pass.getText().toString().equals(vrpass)) {
+                                                   message.setText("Добро пожаловать " + login.getText().toString());
+                                                   comeIn();
+                                                   return true;
+                                               }
+                                               // Пароль неверный
+                                               else {
+                                                   message.setText("Пароль невереный!");
+                                                   return false;
+                                               }
+
+                                           }
+                                       return false;
+                                       }
+
+                                   }
+
        );
 
    }

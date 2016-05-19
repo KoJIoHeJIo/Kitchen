@@ -1,11 +1,11 @@
-<resources>
+﻿<resources>
     <string name="app_name">КухнЯ</string>
 
     <string name="title_activity_instruct">instruct</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="valuea">valuea</string>
-    <string name="title_activity_main3">Список</string>
+    <string name="title_activity_main3">Список покупок</string>
     <string name="about_text">\n\n\n
     Главный разработчик\n
         <b>Мелехин Андрей</b>\n\n
@@ -15,6 +15,7 @@
 
     Ведущий Арт-Дизайнер\n
         <b>Бензак Александр</b></string>
+
     <string name="title_activity_spisok_produktov">Список продуктов</string>
     <string name="title_activity_login">Войти</string>
 
@@ -30,4 +31,7 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+
+    <string name="title_activity_spisok_produktov">SpisokProduktov</string>
+
 </resources>
