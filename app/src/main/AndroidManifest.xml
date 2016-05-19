@@ -37,10 +37,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="i.layout.MenuActivity" />
         </activity>
-        <activity
-            android:name="i.layout.Cookbook"
-            android:label="@string/title_activity_cookbook"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
