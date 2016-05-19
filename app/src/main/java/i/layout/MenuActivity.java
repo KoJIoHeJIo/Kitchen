@@ -38,8 +38,7 @@ public class MenuActivity extends AppCompatActivity {
     public void onClicktobook (View view)
     {
         try {
-            Intent intent = new Intent(MenuActivity.this, Cookbook.class);
-            startActivity(intent);
+
         }catch (Exception e){}
     }
 }

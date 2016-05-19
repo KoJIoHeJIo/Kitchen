@@ -1,12 +1,20 @@
 package i.layout;
 
 import android.app.AlertDialog;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
@@ -26,6 +34,7 @@ import java.util.Arrays;
 
 public class WorkListActivity extends AppCompatActivity{
 ArrayList<String> a=new ArrayList<>();
+    private static final int NOTIFY_ID = 101;
 
     {
         a.add("sdf");
@@ -42,9 +51,46 @@ try {
     fab.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Snackbar.make(view, "Я работаю!!!", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
-        }
+            //Snackbar.make(view, "Я работаю!!!", Snackbar.LENGTH_LONG)
+              //      .setAction("Action", null).show();
+            Context context = getApplicationContext();
+
+            Intent notificationIntent = new Intent(context, MenuActivity.class);
+            PendingIntent contentIntent = PendingIntent.getActivity(context,
+                    0, notificationIntent,
+                    PendingIntent.FLAG_CANCEL_CURRENT);
+
+            Resources res = context.getResources();
+            Notification.Builder builder = new Notification.Builder(context);
+
+            builder.setContentIntent(contentIntent)
+                    .setSmallIcon(R.drawable.mainico)
+                            // большая картинка
+                    .setLargeIcon(BitmapFactory.decodeResource(res, R.drawable.mainico))
+                            //.setTicker(res.getString(R.string.warning)) // текст в строке состояния
+                    .setTicker("Последнее китайское предупреждение!")
+                    .setWhen(System.currentTimeMillis())
+                    .setAutoCancel(true)
+                            //.setContentTitle(res.getString(R.string.notifytitle)) // Заголовок уведомления
+                    .setContentTitle("Напоминание")
+                            //.setContentText(res.getString(R.string.notifytext))
+                    .setContentText("Пора покормить кота"); // Текст уведомления
+
+            // Notification notification = builder.getNotification(); // до API 16
+            try {
+                Notification notification = null;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                    notification = builder.build();
+                    NotificationManager notificationManager = (NotificationManager) context
+                            .getSystemService(Context.NOTIFICATION_SERVICE);
+                    notificationManager.notify(NOTIFY_ID, notification);
+                }
+
+            }
+            catch (Exception e){}
+
+
+}//end block
     });
 
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
