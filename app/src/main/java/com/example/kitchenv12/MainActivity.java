@@ -20,121 +20,100 @@ import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
     private static final String MY_SETTINGS = "first";
+    private ImageButton ib;
+    private TextView logo;
+    private TextView message;
+    private AutoCompleteTextView pass;
+    private AutoCompleteTextView login;
+    private Button goon;
+    private SharedPreferences sp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         // Заставка приложения
-        final ImageButton ib = (ImageButton) findViewById(R.id.imageButton);
+        ib = (ImageButton) findViewById(R.id.imageButton);
         // Надпись кухня
-        final TextView logo = (TextView) findViewById(R.id.logo);
+        logo = (TextView) findViewById(R.id.logo);
         // Сообщения в процессе авторизации и регистрации
-        final TextView message = (TextView) findViewById(R.id.massage);
+        message = (TextView) findViewById(R.id.massage);
 
         // Поле ввода пароля
-        final AutoCompleteTextView pass = (AutoCompleteTextView) findViewById(R.id.pass);
+        pass = (AutoCompleteTextView) findViewById(R.id.pass);
         // Поле ввода логина
-        final AutoCompleteTextView login = (AutoCompleteTextView) findViewById(R.id.login);
+        login = (AutoCompleteTextView) findViewById(R.id.login);
         // Кнопка регистрации
-        final Button goon = (Button) findViewById(R.id.goon);
+        goon = (Button) findViewById(R.id.goon);
+        sp = getSharedPreferences(MY_SETTINGS,
+                Context.MODE_PRIVATE);
 
         // Заставка на 2 секунды
         new Handler().postDelayed(new Runnable() {
             @Override
-            public void run() { ib.setVisibility(View.INVISIBLE);
+            public void run() {
+                ib.setVisibility(View.INVISIBLE);
 
-        // Проверяем, первый ли раз запущенна программа
-        final SharedPreferences sp = getSharedPreferences(MY_SETTINGS,
-                Context.MODE_PRIVATE);
-        boolean hasVisited = sp.getBoolean("hasVisited", false);
-        // Параметр для меню управления паролем.
-        boolean passon = sp.getBoolean("passon", false);
+                // Проверяем, первый ли раз запущенна программа
+                boolean hasVisited = sp.getBoolean("hasVisited", false);
+                // Параметр для меню управления паролем.
+                boolean passon = sp.getBoolean("passon", false);
 
-        if (!hasVisited) {
-            SharedPreferences.Editor e = sp.edit();
-            e.putBoolean("hasVisited", true);
-            e.putString("login", "");
-            e.putString("password", "");
-            e.commit();
-             // Подтверждение действия
-            e.apply();
-            // Принудительный процесс регистрации
+                if (!hasVisited) {
+                    SharedPreferences.Editor e = sp.edit();
+                    e.putBoolean("hasVisited", true);
+                    e.putString("login", "");
+                    e.putString("password", "");
+                    e.commit();
+                    // Подтверждение действия
+                    e.apply();
+                    // Принудительный процесс регистрации
 
-        }
-                LogIn(sp, message, login, pass,goon);
+                }
+                LogIn();
 
             }
         }, 2000);
 
     }
 
-// Метод авторизации.
-public void LogIn (final SharedPreferences sp, final TextView message,final AutoCompleteTextView login,final AutoCompleteTextView pass, final Button goon )
-{
-    String name = sp.getString("login",new String());
-    final String password = sp.getString("password",new String());
-    // Если имя пользователя не указано
-   if(name.equals("")){registration(sp,message,login,pass);}
-    // Если имя указанно и пароль не указан
-    else if(!name.equals("") && password.equals(""))
-   {
-       message.setVisibility(View.VISIBLE);
-       login.setText(name);
-       message.setText("Здравствуй " + name);
-       comeIn(message, login, pass, goon);
-   }
-    else if(!name.equals("") && !password.equals(""))
-   {
-       message.setVisibility(View.VISIBLE);
-       pass.setVisibility(View.VISIBLE);
-       login.setVisibility(View.VISIBLE);
-       goon.setVisibility(View.VISIBLE);
-       goon.setText("Войти");
-       goon.setEnabled(true);
-       login.setText(name);
-       login.setEnabled(false);
-       message.setText("Введите пароль");
-       goon.setOnTouchListener(new View.OnTouchListener() {
-
-                                   @Override
-                                   public boolean onTouch(View v, MotionEvent event) {
-                                       if (event.getAction() == MotionEvent.ACTION_DOWN) {
-
-                                               // Проверка на пустой пароль
-                                               if (pass.getText().length() == 0) {
-                                                   message.setText("Пароль не может быть пустым");
-                                                   return false;
-                                               }
-                                               String vrpass = sp.getString("password", new String());
-                                               // Проверка верности пароля
-                                               if (pass.getText().toString().equals(vrpass)) {
-                                                   message.setText("Добро пожаловать " + login.getText().toString());
-                                                   comeIn(message, login, pass, goon);
-                                                   return true;
-                                               }
-                                               // Пароль неверный
-                                               else {
-                                                   message.setText("Пароль невереный!");
-                                                   return false;
-                                               }
-
-                                           }
-                                       return false;
-                                       }
-
-                                   }
-
-       );
-
-   }
-
-}
+    // Метод авторизации.
+    public void LogIn() {
+        String name = sp.getString("login", new String());
+        final String password = sp.getString("password", new String());
+        // Если имя пользователя не указано
+        if (name.equals("")) {
+            registration();
+        }
+        // Если имя указанно и пароль не указан
+        else if (!name.equals("") && password.equals("")) {
+            message.setVisibility(View.VISIBLE);
+            login.setText(name);
+            message.setText("Здравствуй " + name);
+            comeIn();
+        } else if (!name.equals("") && !password.equals("")) {
+            message.setVisibility(View.VISIBLE);
+            pass.setVisibility(View.VISIBLE);
+            login.setVisibility(View.VISIBLE);
+            goon.setVisibility(View.VISIBLE);
+            goon.setText("Войти");
+            goon.setEnabled(true);
+            login.setText(name);
+            login.setEnabled(false);
+            message.setText("Введите пароль");
+            goon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    checkLogin();
+                }
+            });
+        }
+    }
 
 
     // Регистрация нового пользователя
-    private void registration(final SharedPreferences sp,final TextView message,final AutoCompleteTextView login,final AutoCompleteTextView pass )
-    {
+    private void registration() {
         message.setVisibility(View.VISIBLE);
         pass.setVisibility(View.VISIBLE);
         login.setVisibility(View.VISIBLE);
@@ -145,31 +124,16 @@ public void LogIn (final SharedPreferences sp, final TextView message,final Auto
         message.setText(hello);
         login.isFocusable();
         // Проверка на нажатие кнопки Авторизации
-        goon.setOnTouchListener(new View.OnTouchListener() {
-
+        goon.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    if(login.getText().toString().equals("")){message.setText("Вы забыли ввести Логин.");}
-                         else {
-                        SharedPreferences.Editor e = sp.edit();
-                        e.putString("login", login.getText().toString());
-                        if(!pass.getText().toString().equals("")){e.putString("password", pass.getText().toString());}
-                        e.apply();
-                        e.commit();
-                    comeIn(message, login, pass, goon);
-                    }
-                }
-                return false;
+            public void onClick(View view) {
+                checkRegistration();
             }
         });
-            }
+    }
 
     // Вход в основную часть программы
-    public void comeIn (final TextView message,final AutoCompleteTextView login,final AutoCompleteTextView pass, final Button goon)
-    {
-
-        final ImageButton ib = (ImageButton) findViewById(R.id.imageButton);
+    private void comeIn() {
         ib.setVisibility(View.VISIBLE);
         pass.setVisibility(View.GONE);
         login.setVisibility(View.GONE);
@@ -191,9 +155,55 @@ public void LogIn (final SharedPreferences sp, final TextView message,final Auto
         }, 1500);
     }
 
-
+    public boolean checkRegistration(){
+        if (login.getText().toString().equals("")) {
+            message.setText("Вы забыли ввести Логин.");
+            return false;
+        } else {
+            SharedPreferences.Editor e = sp.edit();
+            e.putString("login", login.getText().toString());
+            if (!pass.getText().toString().equals("")) {
+                e.putString("password", pass.getText().toString());
+            }
+            e.apply();
+            e.commit();
+            comeIn();
+            return true;
         }
+    }
 
+    public boolean checkLogin(){
+        // Проверка на пустой пароль
+        if (pass.getText().length() == 0) {
+            message.setText("Пароль не может быть пустым");
+            return false;
+        }
+        String vrpass = sp.getString("password", new String());
+        // Проверка верности пароля
+        if (pass.getText().toString().equals(vrpass)) {
+            message.setText("Добро пожаловать " + login.getText().toString());
+            comeIn();
+            return true;
+        }
+        // Пароль неверный
+        else {
+            message.setText("Пароль невереный!");
+            return false;
+        }
+    }
+
+    public SharedPreferences getSp() {
+        return sp;
+    }
+
+    public AutoCompleteTextView getLogin() {
+        return login;
+    }
+
+    public AutoCompleteTextView getPass() {
+        return pass;
+    }
+}
 
 
 
