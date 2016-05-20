@@ -45,7 +45,7 @@
         <activity
             android:name="i.layout.ShowCookBook"
             android:label="@string/title_activity_show_cook_book"
-            android:theme="@style/AppTheme.AppBarOverlay"></activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
 
     </application>
 

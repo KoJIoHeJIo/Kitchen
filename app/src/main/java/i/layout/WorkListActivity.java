@@ -28,16 +28,19 @@ import com.example.LoginAndComeIn.R;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Класс рабочего листа списков
+ */
 public class WorkListActivity extends AppCompatActivity{
 @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
 private final ArrayList<String> a = new ArrayList<>();
     private static final int NOTIFY_ID = 101;
 
     {
-        a.add("sdf");
+     a.add("sdf");
     }
         @Override
-    public void onCreate(Bundle savedInstanceState) {
+   final public void onCreate(final Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main3);
 try {
@@ -47,9 +50,8 @@ try {
     FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
     fab.setOnClickListener(new View.OnClickListener() {
         @Override
-        public void onClick(View view) {
-            //Snackbar.make(view, "Я работаю!!!", Snackbar.LENGTH_LONG)
-              //      .setAction("Action", null).show();
+        public void onClick(final View view) {
+
             Context context = getApplicationContext();
 
             Intent notificationIntent = new Intent(context, MenuActivity.class);
@@ -62,16 +64,17 @@ try {
 
             builder.setContentIntent(contentIntent)
                     .setSmallIcon(R.drawable.mainico)
-                            // большая картинка
+                            // Большая картинка
                     .setLargeIcon(BitmapFactory.decodeResource(res, R.drawable.surprise))
-                            //.setTicker(res.getString(R.string.warning)) // текст в строке состояния
+                            // Текст в строке состояния
                     .setTicker("Ты просил напомнить тебе...!")
+                    // Время срабатывания напоминания
                     .setWhen(System.currentTimeMillis()+1500)
                     .setAutoCancel(true)
-                            //.setContentTitle(res.getString(R.string.notifytitle)) // Заголовок уведомления
+                            // Заголовок уведомления
                     .setContentTitle("Напоминашка")
-                            //.setContentText(res.getString(R.string.notifytext))
-                    .setContentText("Время купить продукты!"); // Текст уведомления
+                            // Текст уведомления
+                    .setContentText("Время купить продукты!");
 
             // Notification notification = builder.getNotification(); // до API 16
             try {
@@ -87,8 +90,7 @@ try {
             catch (Exception ignored){}
 
 
-}//end block
-    });
+} });
 
     //noinspection ConstantConditions
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -97,7 +99,6 @@ try {
 {
     exept(e,"припиливании тулбара.");
 }
-
 
             // Принимаем заголовок (имя файла хранения)
             final String header = getIntent().getStringExtra("header");
@@ -136,7 +137,7 @@ try {
 
                                 // Сохранения списка с новым элементом в файл
                                 try {
-                                    saveArrayList(header, list); // сохраняем
+                                    saveArrayList(header, list); // Сохраняем
                                 } catch (Exception e)
                                 {exept(e,"сохранении списка в файл.");}
                                         return true;
@@ -254,18 +255,19 @@ try {
      */
     public boolean onKeyDown(int keyCode, KeyEvent event)
     {
-        //replaces the default 'Back' button action
+        // Replaces the default 'Back' button action
         if(keyCode == KeyEvent.KEYCODE_BACK)
-        {if(getIntent().getStringExtra("title").equals("Список покупок"))
+        {
+            if(getIntent().getStringExtra("title").equals("Список покупок"))
             {
                 Intent intent = new Intent(WorkListActivity.this, MenuActivity.class);
                 startActivity(intent);
             }
-                else
-                    {
-                        Intent intent = new Intent(WorkListActivity.this, SpisokProduktov.class);
-                        startActivity(intent);
-                    }
+            else
+            {
+                Intent intent = new Intent(WorkListActivity.this, SpisokProduktov.class);
+                startActivity(intent);
+            }
         }
         return true;
     }
