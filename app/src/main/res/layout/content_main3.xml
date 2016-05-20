@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="0dp"
-    tools:context="i.layout.Main3Activity"
+    tools:context="i.layout.WorkListActivity"
     tools:showIn="@layout/activity_main3"
     android:id="@+id/inside"
     android:background="#ff9903">
@@ -56,7 +56,7 @@
 
         <TextView
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="20dp"
             android:layout_width="279dp"
             android:layout_height="wrap_content"
             android:text="Список покупок"
@@ -73,7 +73,8 @@
             android:layout_height="match_parent"
             android:id="@+id/imageView"
             android:layout_gravity="left"
-            android:src="@drawable/back" />
+            android:src="@drawable/back"
+            tools:ignore="ContentDescription" />
 
 
     </FrameLayout>

@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="i.layout.Main2Activity"
+    tools:context="i.layout.MenuActivity"
     android:background="#ff9903">
 
     <LinearLayout
@@ -38,9 +38,9 @@
         android:layout_height="wrap_content"
             android:background="#ff9903"
         android:id="@+id/button"
-        android:textSize="40dp"
+        android:textSize="40sp"
         android:clickable="true"
-        android:onClick="onClick"
+        android:onClick="onClicktolist"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -53,8 +53,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="top|center_horizontal"
             android:layout_marginTop="20dp"
-            android:textSize="40dp"
-            android:onClick="onClickprod"
+            android:textSize="40sp"
+            android:onClick="onClicktofood"
             android:background="#ff9903"/>
 
         <Button
@@ -63,6 +63,23 @@
             android:layout_height="wrap_content"
             android:background="#ff9903"
             android:id="@+id/button2"
+            android:textSize="40sp"
+            android:layout_below="@+id/button"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="20dp"
+            android:layout_alignRight="@+id/button"
+            android:layout_alignEnd="@+id/button"
+            android:clickable="true"
+            android:onClick="onClicktoabout"
+            android:layout_gravity="top|center_horizontal" />
+
+        <Button
+            android:text="Рецепты"
+            android:layout_width="345dp"
+            android:layout_height="wrap_content"
+            android:background="#ff9903"
+            android:id="@+id/button3"
             android:textSize="40dp"
             android:layout_below="@+id/button"
             android:layout_alignParentLeft="true"
@@ -71,7 +88,7 @@
             android:layout_alignRight="@+id/button"
             android:layout_alignEnd="@+id/button"
             android:clickable="true"
-            android:onClick="onClickabout"
-            android:layout_gravity="top|center_horizontal" />
+            android:onClick="onClicktobook"
+            android:layout_gravity="center_horizontal" />
     </LinearLayout>
 </RelativeLayout>

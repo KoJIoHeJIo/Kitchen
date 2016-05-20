@@ -13,8 +13,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.kitchenv12.R;
+import com.example.LoginAndComeIn.R;
 
+@SuppressWarnings({"ALL", "ConstantConditions"})
 public class SpisokProduktov extends AppCompatActivity {
 
     @Override
@@ -42,7 +43,7 @@ public class SpisokProduktov extends AppCompatActivity {
         ListView listView = (ListView)findViewById(R.id.listView);
         String[] catnames = getResources().getStringArray(R.array.SistemSpProd);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,	android.R.layout.simple_list_item_1, catnames);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, catnames);
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -52,7 +53,7 @@ public class SpisokProduktov extends AppCompatActivity {
                 switch (position) {
                     // Холодильник
                     case 0:
-                        Intent intent = new Intent(SpisokProduktov.this, Main3Activity.class);
+                        Intent intent = new Intent(SpisokProduktov.this, WorkListActivity.class);
                         // Передача данных между окнами (ключ-значение)
                         intent.putExtra("header", "holodilnik");
                         intent.putExtra("title", "Холодильник");
@@ -60,7 +61,7 @@ public class SpisokProduktov extends AppCompatActivity {
                         break;
                     // Морозильник
                     case 1:
-                        Intent intent1 = new Intent(SpisokProduktov.this, Main3Activity.class);
+                        Intent intent1 = new Intent(SpisokProduktov.this, WorkListActivity.class);
                         // Передача данных между окнами (ключ-значение)
                         intent1.putExtra("header", "morozilnik");
                         intent1.putExtra("title", "Морозильник");
@@ -68,7 +69,7 @@ public class SpisokProduktov extends AppCompatActivity {
                         break;
                     // Кладовка
                     case 2:
-                        Intent intent2 = new Intent(SpisokProduktov.this, Main3Activity.class);
+                        Intent intent2 = new Intent(SpisokProduktov.this, WorkListActivity.class);
                         // Передача данных между окнами (ключ-значение)
                         intent2.putExtra("header", "kladovka");
                         intent2.putExtra("title", "Кладовка");
@@ -76,7 +77,7 @@ public class SpisokProduktov extends AppCompatActivity {
                         break;
                     // Шкаф
                     case 3:
-                        Intent intent3 = new Intent(SpisokProduktov.this, Main3Activity.class);
+                        Intent intent3 = new Intent(SpisokProduktov.this, WorkListActivity.class);
                         // Передача данных между окнами (ключ-значение)
                         intent3.putExtra("header", "shkaf");
                         intent3.putExtra("title", "Шкаф");
@@ -84,7 +85,7 @@ public class SpisokProduktov extends AppCompatActivity {
                         break;
                     // Ящик
                     case 4:
-                        Intent intent4 = new Intent(SpisokProduktov.this, Main3Activity.class);
+                        Intent intent4 = new Intent(SpisokProduktov.this, WorkListActivity.class);
                         // Передача данных между окнами (ключ-значение)
                         intent4.putExtra("header", "Yaschik");
                         intent4.putExtra("title", "Ящик");
@@ -92,7 +93,7 @@ public class SpisokProduktov extends AppCompatActivity {
                         break;
                     // Полка
                     case 5:
-                        Intent intent5 = new Intent(SpisokProduktov.this, Main3Activity.class);
+                        Intent intent5 = new Intent(SpisokProduktov.this, WorkListActivity.class);
                         // Передача данных между окнами (ключ-значение)
                         intent5.putExtra("header", "Polka");
                         intent5.putExtra("title", "Полка");
@@ -100,7 +101,7 @@ public class SpisokProduktov extends AppCompatActivity {
                         break;
                     // Тумба
                     case 6:
-                        Intent intent6 = new Intent(SpisokProduktov.this, Main3Activity.class);
+                        Intent intent6 = new Intent(SpisokProduktov.this, WorkListActivity.class);
                         // Передача данных между окнами (ключ-значение)
                         intent6.putExtra("header", "Tumba");
                         intent6.putExtra("title", "Тумба");

@@ -1,12 +1,17 @@
 package i.layout;
 
 import android.app.AlertDialog;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
@@ -18,16 +23,24 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.kitchenv12.AboutActivity;
-import com.example.kitchenv12.MainActivity;
-import com.example.kitchenv12.R;
+import com.example.LoginAndComeIn.R;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Main3Activity extends AppCompatActivity{
+/**
+ * Класс рабочего листа списков
+ */
+public class WorkListActivity extends AppCompatActivity{
+@SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
+private final ArrayList<String> a = new ArrayList<>();
+    private static final int NOTIFY_ID = 101;
 
+    {
+     a.add("sdf");
+    }
         @Override
-    public void onCreate(Bundle savedInstanceState) {
+   final public void onCreate(final Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main3);
 try {
@@ -37,25 +50,61 @@ try {
     FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
     fab.setOnClickListener(new View.OnClickListener() {
         @Override
-        public void onClick(View view) {
-            Snackbar.make(view, "Я работаю!!!", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
-        }
-    });
+        public void onClick(final View view) {
 
+            Context context = getApplicationContext();
+
+            Intent notificationIntent = new Intent(context, MenuActivity.class);
+            PendingIntent contentIntent = PendingIntent.getActivity(context,
+                    0, notificationIntent,
+                    PendingIntent.FLAG_CANCEL_CURRENT);
+
+            Resources res = context.getResources();
+            Notification.Builder builder = new Notification.Builder(context);
+
+            builder.setContentIntent(contentIntent)
+                    .setSmallIcon(R.drawable.mainico)
+                            // Большая картинка
+                    .setLargeIcon(BitmapFactory.decodeResource(res, R.drawable.surprise))
+                            // Текст в строке состояния
+                    .setTicker("Ты просил напомнить тебе...!")
+                    // Время срабатывания напоминания
+                    .setWhen(System.currentTimeMillis()+1500)
+                    .setAutoCancel(true)
+                            // Заголовок уведомления
+                    .setContentTitle("Напоминашка")
+                            // Текст уведомления
+                    .setContentText("Время купить продукты!");
+
+            // Notification notification = builder.getNotification(); // до API 16
+            try {
+                Notification notification;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                    notification = builder.build();
+                    NotificationManager notificationManager = (NotificationManager) context
+                            .getSystemService(Context.NOTIFICATION_SERVICE);
+                    notificationManager.notify(NOTIFY_ID, notification);
+                }
+
+            }
+            catch (Exception ignored){}
+
+
+} });
+
+    //noinspection ConstantConditions
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    toolbar.setTitle("Список продуктов");
+
 }catch (Exception e)
 {
     exept(e,"припиливании тулбара.");
 }
 
-
             // Принимаем заголовок (имя файла хранения)
             final String header = getIntent().getStringExtra("header");
 
             // Устанавливаем заготовок
-            Main3Activity.this.setTitle(getIntent().getStringExtra("title"));
+            WorkListActivity.this.setTitle(getIntent().getStringExtra("title"));
             final TextView logo = (TextView) findViewById(R.id.textView3);
             logo.setText(getIntent().getStringExtra("title"));
 
@@ -68,7 +117,7 @@ try {
             final EditText editText = (EditText) findViewById(R.id.editText);
 
             // Адаптер для отображения списка в listView
-            final ArrayAdapter<String> adapter = new ArrayAdapter<String>(Main3Activity.this, android.R.layout.simple_list_item_1, list);
+            final ArrayAdapter<String> adapter = new ArrayAdapter<>(WorkListActivity.this, android.R.layout.simple_list_item_1, list);
             listView.setAdapter(adapter);
 
             // Обработчик нажатия на клавиатуре Enter и созранения нового элемента списка
@@ -88,7 +137,7 @@ try {
 
                                 // Сохранения списка с новым элементом в файл
                                 try {
-                                    saveArrayList(header, list); // сохраняем
+                                    saveArrayList(header, list); // Сохраняем
                                 } catch (Exception e)
                                 {exept(e,"сохранении списка в файл.");}
                                         return true;
@@ -119,30 +168,33 @@ try {
             }
         }
 
-
-            // Метод вызова диалога, с выбором функций для элемента списка
+    /**
+     * Открывает диалог для выбора действия с выбранным элементом списка.
+     * @param adapter - Адаптер списка
+     * @param selectedItem - Номер позиции выбранного элемента списка
+     * @param editText - Форма ввода текста
+     * @param list - Список
+     */
             private void openQuitDialog(final ArrayAdapter<String> adapter,final String selectedItem,final EditText editText, final ArrayList<String> list) {
-                AlertDialog.Builder quitDialog = new AlertDialog.Builder(Main3Activity.this);
+                AlertDialog.Builder quitDialog = new AlertDialog.Builder(WorkListActivity.this);
                 quitDialog.setTitle("Выбран элемент : " + selectedItem);
 
                 quitDialog.setPositiveButton("Удалить ", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // TODO Auto-generated method stub
+
                         adapter.remove(selectedItem);
                         list.remove(selectedItem);
                         // Сохранения списка после удаления
-                        try {
                             saveArrayList("Spisok_pokupok", list); // сохраняем
-                        } catch (Exception e)
-                        {exept(e,"сохранении списка в файл.");}
+
                     }
                 });
 
                 quitDialog.setNegativeButton("Редактировать ", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // TODO Auto-generated method stub
+
                         editText.setText(selectedItem);
                         adapter.remove(selectedItem);
                         editText.requestFocus();
@@ -152,17 +204,31 @@ try {
                 quitDialog.show();
             }
 
-    // Сохранение списка в файл
+    /**
+     *Сохранение списка в файл
+     * @param name - Название списка
+     * @param list - Список
+     * @return - булеан успеха/неудачи операции
+     */
     private boolean saveArrayList(String name, ArrayList<String> list) {
+
         SharedPreferences prefs = getSharedPreferences("myPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         StringBuilder sb = new StringBuilder();
-        for (String s : list) sb.append(s).append("<s>");
-        sb.delete(sb.length() - 3, sb.length());
+        if(sb.length()>3) {
+            for (String s : list) sb.append(s).append("<s>");
+            sb.delete(sb.length() - 3, sb.length());
+        }
         editor.putString(name, sb.toString()).apply();
         return true;
     }
 // Загрузка списка из файла
+
+    /**
+     * Загрузка списка из файла
+     * @param name - Название списка
+     * @return - Список
+     */
     private ArrayList<String> loadArrayList(String name) {
         SharedPreferences prefs = getSharedPreferences("myPrefs", MODE_PRIVATE);
         String[] strings = prefs.getString(name, "").split("<s>");
@@ -171,20 +237,35 @@ try {
         return list;
     }
     // Сообщение об ошибке (код ошибки, имя действия)
-    public void exept(Exception e, String doit)
+
+    /**
+     * Выводит сообщение об ошибке.
+     * @param e - Код ошибки
+     * @param doit - Описание ошибки
+     */
+    private void exept(Exception e, String doit)
     {
         Toast toast = Toast.makeText(getApplicationContext(),
                 "Приложение КухнЯ: Ошибка при " +doit+ "\r\n" + "Код ошибки: "+e, Toast.LENGTH_LONG);
         toast.show();
     }
     @Override
+    /**
+     * Слушатель действия нажатия на кнопку "Назад"
+     */
     public boolean onKeyDown(int keyCode, KeyEvent event)
     {
-        //replaces the default 'Back' button action
+        // Replaces the default 'Back' button action
         if(keyCode == KeyEvent.KEYCODE_BACK)
-        {if(getIntent().getStringExtra("title").equals("Список покупок"))
+        {
+            if(getIntent().getStringExtra("title").equals("Список покупок"))
             {
-                Intent intent = new Intent(Main3Activity.this, MainActivity.class);
+                Intent intent = new Intent(WorkListActivity.this, MenuActivity.class);
+                startActivity(intent);
+            }
+            else
+            {
+                Intent intent = new Intent(WorkListActivity.this, SpisokProduktov.class);
                 startActivity(intent);
             }
         }

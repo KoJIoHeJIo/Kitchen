@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.kitchenv12.AboutActivity"
+    tools:context="i.layout.AboutActivity"
     android:background="#ff9903">
 
     <TextView
@@ -23,7 +23,8 @@
         android:shadowRadius="8"
         android:id="@+id/textView5"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+         />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -38,7 +39,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/about_text"
-        android:textSize="25dp"
+        android:textSize="25sp"
         android:id="@+id/textView3"
         android:layout_below="@+id/textView5"
         android:layout_alignParentBottom="true"
